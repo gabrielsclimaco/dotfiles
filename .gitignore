@@ -1,0 +1,20 @@
+# Ignore everything
+/*
+
+# But not these files
+!.gitignore
+!README.md
+!alacritty/
+!awesome/
+# Only adds nvim/init.vim
+!nvim/
+nvim/*
+!nvim/init.vim
+!picom.conf
+!starship/
+# Only adds zsh/.zshrc
+!zsh/
+zsh/*
+!zsh/.zshrc
+!.zshenv
+

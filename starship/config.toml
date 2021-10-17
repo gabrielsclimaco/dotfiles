@@ -1,0 +1,50 @@
+add_newline = false
+
+[line_break]
+disabled = true
+
+[character]
+format = "$symbol"
+success_symbol = "[](bold green) "
+error_symbol = "[](bold red) "
+
+[aws]
+symbol = " "
+
+[directory]
+read_only = " "
+home_symbol = ""
+
+[docker_context]
+symbol = " "
+
+[gcloud]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[java]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[package]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[terraform]
+symbol = "" 
+format = "via [$symbol $version]($style) "
