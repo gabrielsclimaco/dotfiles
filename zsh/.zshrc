@@ -42,7 +42,7 @@ alias nvs="nordvpn status"
 
 # Env Vars
 # Defaults
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export TERM="xterm-256color"
@@ -65,6 +65,7 @@ export STARSHIP_CONFIG=~/.config/starship/config.toml
 export GPG_TTY=$(tty)
 export CLOUDSDK_PYTHON=python2
 
-# Evals
+# Should run everytime
+cat ~/.cache/wal/sequences 2>/dev/null 2&>1
 eval $(thefuck --alias)
 eval "$(starship init zsh)"
