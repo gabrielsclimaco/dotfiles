@@ -19,23 +19,21 @@ require("awful.autofocus")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
-RC = {} -- global namespace, on top before require any modules
+-- {{{ Global namespace, on top before require any modules
+RC = {}
 RC.vars = require("main.user-variables")
+-- }}}
 
 -- {{{ Error handling
 require("main.error-handling")
 -- }}}
 
+-- {{{ Theme
+require("main.theme")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- }}}
+
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.wallpaper = RC.vars.wallpaper
-
--- This is used later as the default terminal and editor to run.
-terminal = RC.vars.terminal
-editor = os.getenv("EDITOR") or RC.var.editor
-editor_cmd = terminal .. " -e " .. editor
-
 modkey = RC.vars.modkey
 
 -- Custom Local Library
@@ -72,13 +70,9 @@ RC.tags = main.tags()
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 RC.mainmenu = awful.menu({ items = main.menu() }) -- in globalkeys
-
--- a variable needed in statusbar (helper)
 RC.launcher = awful.widget.launcher(
   { image = beautiful.awesome_icon, menu = RC.mainmenu }
 )
-
--- Menubar configuration
 menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications that require it
 -- }}}
 
@@ -116,6 +110,6 @@ beautiful.useless_gap = 5
 
 -- {{{ Startup apps and scripts
 -- awful.spawn.with_shell("picom")
-awful.spawn.with_shell("feh --bg-fill ~/Imagens/Wallpapers/zsr869qfnht71.png")
+awful.spawn.with_shell("wal -R")
 awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
 -- }}}
