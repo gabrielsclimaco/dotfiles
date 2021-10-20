@@ -1,4 +1,4 @@
-" vim-bootstrap 2021-10-15 18:02:31
+" vim-bootstrap 2021-10-15 18:02:31 + my stuff :)
 
 "*****************************************************************************
 "" Vim-Plug core
@@ -259,6 +259,12 @@ let g:airline_skip_empty_sections = 1
 "*****************************************************************************
 "" Abbreviations
 "*****************************************************************************
+"" Exit insert mode without using pinky
+inoremap kj <Esc>
+
+"" Clear search highlight
+nnoremap kj :nohl<CR>
+
 "" no one is really happy until you have this shortcuts
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
@@ -422,9 +428,9 @@ if has('autocmd')
 endif
 
 "" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+" if has('unnamedplus')
+"   set clipboard=unnamed,unnamedplus
+" endif
 
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
