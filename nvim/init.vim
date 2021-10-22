@@ -262,9 +262,6 @@ let g:airline_skip_empty_sections = 1
 "" Exit insert mode without using pinky
 inoremap kj <Esc>
 
-"" Clear search highlight
-nnoremap kj :nohl<CR>
-
 "" no one is really happy until you have this shortcuts
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
