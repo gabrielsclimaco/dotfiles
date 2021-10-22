@@ -25,6 +25,9 @@ alias s="startx"
 alias pac="sudo pacman"
 alias copy="xclip -selection clipboard"
 alias t="touch"
+alias attc="awmtt start -C $1"
+alias attr="awmtt restart"
+alias atts="awmtt stop"
 # Coding
 alias apb='ansible-playbook'
 alias v='nvim'

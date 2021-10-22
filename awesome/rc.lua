@@ -79,10 +79,6 @@ menubar.utils.terminal = RC.vars.terminal -- Set the terminal for applications t
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Statusbar: Wibar
-require("decoration.statusbar")
--- }}}
-
 -- {{{ Mouse and Key bindings
 RC.globalkeys = binding.globalkeys()
 RC.globalkeys = binding.bindtotags(RC.globalkeys)
@@ -104,12 +100,19 @@ awful.rules.rules = main.rules(
 require("main.signals")
 -- }}}
 
+-- {{{ Statusbar: Wibar
+local statusbar = require("statusbar.statusbar")
+statusbar()
+-- }}}
+
 -- {{{ Gaps
 beautiful.useless_gap = 5
 -- }}}
 
 -- {{{ Startup apps and scripts
--- awful.spawn.with_shell("picom")
+awful.spawn.with_shell("picom")
 awful.spawn.with_shell("wal -R")
-awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
+awful.spawn.with_shell("flameshot &")
+awful.spawn.with_shell("setxkbmap -model abnt2 -layout us -variant intl -option caps:ctrl_modifier")
+  -- awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
 -- }}}
