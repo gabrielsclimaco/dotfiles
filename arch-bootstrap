@@ -1,0 +1,122 @@
+#!/bin/bash
+
+# Set up YAY (AUR Helper)
+cd /tmp/
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ~
+
+# Install pacman packages
+pacman = (
+  ack
+  copyq
+  curl
+  discord
+  docker
+  docker-compose
+  unzip
+  xclip
+  python-pip
+  gimp
+  gnupg
+  gradle
+  gthumb
+  flameshot
+  imagemagick
+  kubectl
+  jdk8-openjdk
+  jre8-openjdk
+  remmina
+  starship
+  steam
+  telegram-desktop
+  terraform
+  thefuck
+  tmate
+  tor
+  vlc
+  virtualbox
+  virtualbox-host-modules-arch
+  wireguard-tools
+  zsh
+  zsh-completions
+)
+
+sudo pacman -S ${pacman[@]}
+
+# Install yay packages
+yay = (
+  android-studio
+  awmtt
+  aws-cli-v2-bin
+  brave
+  droidcam
+  google-cloud-sdk
+  kubernetes-helm2
+  lain-git
+  joplin-desktop
+  nordvpn-bin
+  nvm
+  oh-my-zsh-git
+  overmind
+  slack-desktop
+  visual-studio-code-bin
+)
+
+yay -S ${yay[@]}
+
+# Setup node
+source /usr/share/nvm/init-nvm.sh
+nvm install node
+nvm install --lts
+
+# Install npm global packages
+npm = (
+  cordova
+  @quasar/cli
+  yarn
+)
+
+npm install -g ${npm[@]}
+
+# Set up git
+git config --global user.email "gabrielsclimaco@protonmail.com"
+git config --global user.name "Gabriel Climaco"
+
+echo "[diff \"ansible-vault\"]
+  textconv = ansible-vault view
+  cachetextconv = true" >> ~/.gitconfig
+
+# Clone dotfiles
+cd ~/.config
+git init
+git checkout -b main
+git remote add origin git@github.com:gabrielsclimaco/dotfiles.git
+git fetch origin
+git reset --hard origin/main
+cd ~
+
+# Set up zsh
+cp ~/.config/.zshenv ~/
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+# Installs ansible and some other work required tools
+cd ~/code/liber/sre-ansible/configurations/ansible
+pip install -r requirements.txt
+ansible-galaxy role install -r requirements.yml -p playbooks/roles/
+ansible-galaxy collection install -r requirements.yml -p .
+
+# Set up docker
+sudo systemctl enable --now docker.service
+sudo groupadd docker
+sudo usermod -aG docker coffee
+
+# Set up ruby on rails
+gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable
+rvm install 2.6.8
+source ~/.rvm/scripts/rvm
+rvm use 2.6.8 --default
+gem install rails -v 5.2.5

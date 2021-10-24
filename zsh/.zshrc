@@ -40,7 +40,7 @@ alias nvds="nordvpn status && nordvpn disconnect"
 alias nvs="nordvpn status"
 
 # Loads NVM and RVM
-[[ -s "$HOME/.rvm/s/rvm" ]] && source "$HOME/.rvm/s/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
 
 # Env Vars
