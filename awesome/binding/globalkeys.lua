@@ -147,8 +147,8 @@ function _M.get()
               function () awful.client.moveresize( 20,   0,   0,   0) end),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    -- Menubar
-    awful.key({ modkey }, "space", function() menubar.show() end,
+    -- Application launcher (rofi)
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show run") end,
               {description = "show the menubar", group = "launcher"}),
     -- Firefox
     awful.key({ modkey }, "b", function () awful.spawn.with_shell("firefox") end,

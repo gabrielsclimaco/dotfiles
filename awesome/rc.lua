@@ -113,6 +113,6 @@ beautiful.useless_gap = 5
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("wal -R")
 awful.spawn.with_shell("flameshot &")
-awful.spawn.with_shell("setxkbmap -model abnt2 -layout us -variant intl -option caps:ctrl_modifier")
-  -- awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
+-- awful.spawn.with_shell("setxkbmap -model abnt2 -layout us -variant intl -option caps:ctrl_modifier")
+awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
 -- }}}
