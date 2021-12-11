@@ -25,12 +25,22 @@ alias s="startx"
 alias pac="sudo pacman"
 alias copy="xclip -selection clipboard"
 alias t="touch"
+alias sc="sudo systemctl"
 alias attc="awmtt start -C $1"
 alias attr="awmtt restart"
 alias atts="awmtt stop"
-# Coding
+alias shut="shutdown -h now"
+alias btl="bluetoothctl"
+alias bton="bluetoothctl power on"
+alias pf="pfetch"
+alias cd1="cd ../ && ls"
+alias cd2="cd ../../ && ls"
+alias cd3="cd ../../../ && ls"
+alias cd2="cd ../../../../ && ls"
+# Work
 alias apb='ansible-playbook'
 alias v='nvim'
+alias cpid="cat .ssh/id_ed25519.pub | xclip -selection clipboard"
 # Nord
 alias nv="nordvpn"
 alias nvc="nordvpn connect"
@@ -41,7 +51,7 @@ alias nvs="nordvpn status"
 
 # Loads NVM and RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
+[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh 
 
 # Env Vars
 # Defaults
