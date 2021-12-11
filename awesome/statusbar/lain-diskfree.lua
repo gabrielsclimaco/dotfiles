@@ -42,6 +42,6 @@ W.fs = lain.widget.fs({
   notification_preset = {
     fg = xrdb.foreground,
     bg = xrdb.background,
-    font = "Hack Nerd Font Mono 12"
+    font = "Hack Nerd Font Mono 16"
   },
 })

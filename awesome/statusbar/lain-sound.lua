@@ -67,7 +67,7 @@ W.volume_wibox = lain.widget.alsabar({
   timeout = 1,
   settings = volume_wibox_settings,
   colors = volume_wibox_colors,
-  notification_preset = { font = "Hack Nerd Font Mono 12" }
+  notification_preset = { font = "Hack Nerd Font Mono 14" }
 })
 
 W.volume_wibox_buttons = my_table.join (
@@ -99,7 +99,7 @@ W.volume_wibox.bar:buttons(W.volume_wibox_buttons)
 W.volumebg = wibox.container.background(
   W.volume_wibox.bar, xrdb.color7, gears.shape.rectangle)
 W.volumewidget = wibox.container.margin(
-  W.volumebg, dpi(2), dpi(7), dpi(6), dpi(6))
+  W.volumebg, dpi(2), dpi(7), dpi(9), dpi(9))
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 

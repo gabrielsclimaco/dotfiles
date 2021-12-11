@@ -79,13 +79,10 @@ W.temp = lain.widget.temp({
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 -- Textclock
-I.iconclock = wibox.widget.textbox(" ")
+I.iconclock = wibox.widget.textbox(markup(xrdb.color2, " "))
 
 W.textclock = wibox.widget.textclock(
-  markup.bold( 
-    markup(xrdb.color7, "%A %d %B ")
-        .. markup(xrdb.color7, "-")
-        .. markup(xrdb.color7, " %H:%M ")))
+  markup.bold("%A %d %B " .. "-" .. " %H:%M "))
 
 W.clock_container = wibox.widget ({
   layout = wibox.layout.fixed.horizontal,
@@ -94,7 +91,7 @@ W.clock_container = wibox.widget ({
 })
 W.clockwidget = wibox.container.margin(
   W.clock_container,
-  dpi(250), -- left
+  dpi(1100), -- left
   dpi(0), -- right
   dpi(0),   -- top
   dpi(0)    -- bottom
@@ -111,7 +108,7 @@ W.calendar = lain.widget.cal({
   notification_preset = {
     fg = xrdb.foreground,
     bg = xrdb.background,
-    font = "Hack Nerd Font Mono 12"
+    font = "Hack Nerd Font Mono 18"
   },
 })
 

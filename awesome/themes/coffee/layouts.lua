@@ -5,7 +5,7 @@ local layout_path = theme_path .. "layouts/" .. layout_icons ..
 "/"
 
 -- Only layout I actually use
-theme.layout_tileleft       = layout_path .. "tileleft.png"
+theme.layout_tile           = layout_path .. "tile.png"
 
 -- default awful related
 -- theme.layout_dwindle        = layout_path .. "dwindle.png"
