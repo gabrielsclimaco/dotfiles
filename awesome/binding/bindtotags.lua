@@ -9,6 +9,8 @@ local modkey = RC.vars.modkey
 
 -- {{{ Key bindings
 
+local np_map = { 87, 88, 89, 83, 84, 85, 79, 80, 81 }
+
 function _M.get(globalkeys)
   -- Bind all key numbers to tags.
   -- Be careful: we use keycodes to make it work on any keyboard layout.
@@ -19,6 +21,16 @@ function _M.get(globalkeys)
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
       -- View tag only.
       awful.key({ modkey }, "#" .. i + 9,
+        function ()
+          local screen = awful.screen.focused()
+          local tag = screen.tags[i]
+          if tag then
+            tag:view_only()
+          end
+        end,
+        {description = "view tag #"..i, group = "tag"}),
+      -- Numpad.
+      awful.key({ modkey }, "#" .. np_map[i],
         function ()
           local screen = awful.screen.focused()
           local tag = screen.tags[i]
@@ -52,6 +64,16 @@ function _M.get(globalkeys)
           end
         end,
         {description = "move focused client to tag #"..i, group = "tag"}),
+      -- Numpad.
+      awful.key({ modkey, "Shift" }, "#" .. np_map[i],
+        function ()
+          local screen = awful.screen.focused()
+          local tag = screen.tags[i]
+          if tag then
+            tag:view_only()
+          end
+        end,
+        {description = "view tag #"..i, group = "tag"}),
       
       --  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
       -- Toggle tag on focused client.

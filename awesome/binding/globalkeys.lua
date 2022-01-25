@@ -127,32 +127,75 @@ function _M.get()
     -- Resize
     --awful.key({ modkey, "Control" }, "Left",  function () awful.client.moveresize( 20,  20, -40, -40) end),
     --awful.key({ modkey, "Control" }, "Right", function () awful.client.moveresize(-20, -20,  40,  40) end),
-    awful.key({ modkey, "Control" }, "Down",  
-              function () awful.client.moveresize( 0, 0, 0, -20) end),
-    awful.key({ modkey, "Control" }, "Up",    
-              function () awful.client.moveresize( 0, 0, 0,  20) end),
-    awful.key({ modkey, "Control" }, "Left",  
-              function () awful.client.moveresize( 0, 0, -20, 0) end),
-    awful.key({ modkey, "Control" }, "Right", 
-              function () awful.client.moveresize( 0, 0,  20, 0) end),
+    awful.key({ modkey, "Control" }, "Down",
+              function () awful.client.moveresize( 0, 0, 0, -20) end,
+              {description = "decrease size vertically", group = "floating window"}),
+    awful.key({ modkey, "Control" }, "Up",
+              function () awful.client.moveresize( 0, 0, 0,  20) end,
+              {description = "increase size vertically", group = "floating window"}),
+    awful.key({ modkey, "Control" }, "Left",
+              function () awful.client.moveresize( 0, 0, -20, 0) end,
+              {description = "decrease size horizontally", group = "floating window"}),
+    awful.key({ modkey, "Control" }, "Right",
+              function () awful.client.moveresize( 0, 0,  20, 0) end,
+              {description = "increase size horizontally", group = "floating window"}),
 
     -- Move
-    awful.key({ modkey, "Shift"   }, "Down",  
-              function () awful.client.moveresize(  0,  20,   0,   0) end),
-    awful.key({ modkey, "Shift"   }, "Up",    
-              function () awful.client.moveresize(  0, -20,   0,   0) end),
-    awful.key({ modkey, "Shift"   }, "Left",  
-              function () awful.client.moveresize(-20,   0,   0,   0) end),
-    awful.key({ modkey, "Shift"   }, "Right", 
-              function () awful.client.moveresize( 20,   0,   0,   0) end),
+    awful.key({ modkey, "Shift"   }, "Down",
+              function () awful.client.moveresize(  0,  20,   0,   0) end,
+              {description = "move down", group = "floating window"}),
+    awful.key({ modkey, "Shift"   }, "Up",
+              function () awful.client.moveresize(  0, -20,   0,   0) end,
+              {description = "move up", group = "floating window"}),
+    awful.key({ modkey, "Shift"   }, "Left",
+              function () awful.client.moveresize(-20,   0,   0,   0) end,
+              {description = "move left", group = "floating window"}),
+    awful.key({ modkey, "Shift"   }, "Right",
+              function () awful.client.moveresize( 20,   0,   0,   0) end,
+              {description = "move right", group = "floating window"}),
+    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    -- Media control keys
+    awful.key({}, "XF86AudioRaiseVolume",
+              function ()
+                awful.spawn.with_shell("amixer -q set Master 5%+")
+              end,
+              {description = "volume up", group = "media"}),
+    awful.key({}, "XF86AudioLowerVolume",
+              function ()
+                awful.spawn.with_shell("amixer -q set Master 5%-")
+              end,
+              {description = "volume down", group = "media"}),
+    awful.key({}, "XF86AudioMute",
+              function ()
+                awful.spawn.with_shell("amixer -q set Master toggle")
+              end,
+              {description = "volume mute", group = "media"}),
+    awful.key({}, "XF86AudioPlay",
+              function ()
+                awful.spawn.with_shell("playerctl play-pause")
+              end,
+              {description = "play/pause media", group = "media"}),
+    awful.key({}, "XF86AudioNext",
+              function ()
+                awful.spawn.with_shell("playerctl next")
+              end,
+              {description = "play next", group = "media"}),
+    awful.key({}, "XF86AudioPrev",
+              function ()
+                awful.spawn.with_shell("playerctl previous")
+              end,
+              {description = "play previous", group = "media"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    -- Application launcher (rofi)
-    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show run") end,
+    -- Application launcher (dmenu)
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("sh ${HOME}/.config/awesome/scripts/dmenu.sh") end,
               {description = "show the menubar", group = "launcher"}),
     -- Firefox
     awful.key({ modkey }, "b", function () awful.spawn.with_shell("firefox") end,
-              {description = "opens Firefox", group = "launcher"})
+              {description = "opens Firefox", group = "launcher"}),
+    -- Flameshot
+    awful.key({}, "Print", function () awful.spawn.with_shell("flameshot gui") end,
+              {description = "opens Flameshot (screeshot tool)", group = "launcher"})
 
   )
 

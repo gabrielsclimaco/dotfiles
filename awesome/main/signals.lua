@@ -12,6 +12,8 @@ local beautiful = require("beautiful")
 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
+  c.shape = function(cr,w,h) gears.shape.rounded_rect(cr, w, h, 10) end
+
   -- Set the windows at the slave,
   -- i.e. put it at the end of others instead of setting it master.
   -- if not awesome.startup then awful.client.setslave(c) end

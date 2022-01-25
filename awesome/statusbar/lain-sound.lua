@@ -83,11 +83,11 @@ W.volume_wibox_buttons = my_table.join (
     W.volume_wibox.update()
     end),
   awful.button({}, 4, function()
-    os.execute(string.format("%s set %s 1%%+", W.volume_wibox.cmd, W.volume_wibox.channel))
+    os.execute(string.format("%s set %s 5%%+", W.volume_wibox.cmd, W.volume_wibox.channel))
     W.volume_wibox.update()
   end),
-    awful.button({}, 5, function()
-    os.execute(string.format("%s set %s 1%%-", W.volume_wibox.cmd, W.volume_wibox.channel))
+  awful.button({}, 5, function()
+    os.execute(string.format("%s set %s 5%%-", W.volume_wibox.cmd, W.volume_wibox.channel))
     W.volume_wibox.update()
   end)
 )

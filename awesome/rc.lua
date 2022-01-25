@@ -109,14 +109,14 @@ statusbar()
 beautiful.useless_gap = 5
 -- }}}
 
+-- {{{ Notification icon
+beautiful.notification_icon_size = 100
+-- }}}
+
 -- {{{ Startup apps and scripts
 awful.spawn.with_shell("picom --experimental-backends")
 awful.spawn.with_shell("wal -R")
 awful.spawn.with_shell("feh --bg-fill ~/Imagens/Wallpapers/red-sun.png")
 awful.spawn.with_shell("flameshot &")
 awful.spawn.with_shell("copyq &")
---awful.spawn.with_shell("setxkbmap -model abnt2 -layout us -variant intl -option caps:ctrl_modifier")
--- awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
-awful.spawn.with_shell("setxkbmap -model abnt2 -layout us -variant intl")
--- awful.spawn.with_shell("setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier")
 -- }}}

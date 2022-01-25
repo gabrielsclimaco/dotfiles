@@ -12,7 +12,8 @@ theme.font = "Hack Nerd Font 14"
 theme.taglist_font = "Hack Nerd Font Mono 16"
 
 -- Taglist
-theme.bg_normal     = xrdb.background .. "ee"
+-- theme.bg_normal     = xrdb.background .. "ee" -- "ee" for transparency
+theme.bg_normal     = xrdb.background
 -- theme.bg_focus      = xrdb.color12
 -- theme.bg_urgent     = xrdb.color9
 -- theme.bg_minimize   = xrdb.color8
