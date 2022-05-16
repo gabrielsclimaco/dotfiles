@@ -2,6 +2,9 @@
 local gears = require("gears")
 local awful     = require("awful")
 local beautiful = require("beautiful")
+local xresources = require("beautiful.xresources")
+local xrdb = xresources.get_current_theme()
+local dpi = xresources.apply_dpi
 
 -- Wibox handling library
 local wibox = require("wibox")
@@ -50,14 +53,18 @@ end
 -- {{{ Populate Wibar
 function WB.generate_wibox (s)
   -- Create the wibox
-  s.wibox_one = awful.wibar({ position = "top", screen = s })
+  s.wibox_one = awful.wibar({
+    position = "top",
+    screen   = s,
+    type     = "dock"
+  })
 
   -- Add widgets to the wibox
   s.wibox_one:setup {
     layout = wibox.layout.align.horizontal,
     WB.add_widgets_left (s),
     WB.add_widgets_middle (s),
-    WB.add_widgets_right (s),
+    WB.add_widgets_right (s)
   }
 end
 -- }}}
