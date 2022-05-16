@@ -12,11 +12,14 @@
 nvim/*
 !nvim/init.vim
 !picom.conf
-!starship/
 !rofi/
+!scripts/
+!smug/
+!starship/
+!.tmux.conf
+!wal/
 # Only adds zsh/.zshrc
 !zsh/
 zsh/*
 !zsh/.zshrc
 !.zshenv
-
