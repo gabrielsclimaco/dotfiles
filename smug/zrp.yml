@@ -1,0 +1,13 @@
+session: zrp
+
+root: ~/code/zrp
+
+windows:
+  - name: vault
+    root: ./vault-tf
+    layout: main-vertical
+    panes:
+      - root: .
+        commands:
+          - export AWS_PROFILE=zrp
+          - terraform plan -var-file=vault.tfvars

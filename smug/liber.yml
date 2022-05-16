@@ -1,0 +1,19 @@
+session: liber
+
+root: ~/code/liber
+
+windows:
+  - name: k8s
+    root: ./sign
+    layout: main-vertical
+    panes:
+      - root: .
+      - root: ../helm-charts
+  - name: sre
+    root: ./sre-ansible
+  - name: on-call
+    root: .
+    panes:
+      - commands:
+        - cd ~/Downloads/liber
+        - clear
