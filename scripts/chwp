@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Get filename and extension
+filepath=$1
+filename=$(basename "$filepath")
+ext="${filename##*.}"
+
+# Copy wallapaper and generate color scheme
+cp $filepath ~/Imagens/Wallpapers/current/wallpaper.$ext
+wal -i ~/Imagens/Wallpapers/current/wallpaper.$ext
+
+# Update theme
+cp ~/.cache/wal/colors.Xresources ~/.Xresources
+# If extension has changed, update path to wallpaper on AwsomeWM
+sed -i "s/current\/wallpaper.*/current\/wallpaper.$ext\")/" ~/.config/awesome/rc.lua
+# Update firefox theme
+pywalfox update
