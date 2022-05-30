@@ -52,6 +52,7 @@ Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 Plug 'ayu-theme/ayu-vim'
 Plug 'junegunn/goyo.vim'
 Plug 'dylanaraps/wal.vim'
+Plug 'towolf/vim-helm'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -186,7 +187,8 @@ colorscheme wal
 hi! Normal ctermbg=NONE guibg=NONE 
 hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE
 
-set mousemodel=popup
+" set mouse=a
+" set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
 set gfn=Monospace\ 10
@@ -375,7 +377,7 @@ nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
 
 "" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
+" nnoremap <leader>. :lcd %:p:h<CR>
 
 "" Opens an edit command with the path of the currently edited file filled in
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -431,15 +433,15 @@ endif
 "   set clipboard=unnamed,unnamedplus
 " endif
 
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
+inoremap <C-v> <ESC>"+pa
+vnoremap <C-c> "+y<CR>
+vnoremap <C-x> "+x<CR>
 
-if has('macunix')
-  " pbcopy for OSX copy/paste
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
-endif
+" if has('macunix')
+"   " pbcopy for OSX copy/paste
+"   vmap <C-x> :!pbcopy<CR>
+"   vmap <C-c> :w !pbcopy<CR><CR>
+" endif
 
 "" Buffer nav
 noremap <leader>z :bp<CR>
@@ -576,7 +578,11 @@ vnoremap <leader>rem  :RExtractMethod<cr>
 " let g:vue_disable_pre_processors=1
 " vim vue plugin
 let g:vim_vue_plugin_load_full_syntax = 1
+autocmd FileType vue setlocal commentstring=//\ %s
 
+" HCL commentary
+autocmd FileType hcl setlocal commentstring=#\ %s
+autocmd FileType tf setlocal commentstring=#\ %s
 
 "*****************************************************************************
 "*****************************************************************************

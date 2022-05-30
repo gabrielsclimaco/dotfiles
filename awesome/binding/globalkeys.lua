@@ -43,8 +43,8 @@ function _M.get()
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () RC.mainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    -- awful.key({ modkey,           }, "w", function () RC.mainmenu:show() end,
+    --           {description = "show main menu", group = "awesome"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Layout manipulation
@@ -109,8 +109,6 @@ function _M.get()
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -187,9 +185,17 @@ function _M.get()
               {description = "play previous", group = "media"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-    -- Application launcher (dmenu)
-    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show run") end,
-              {description = "show the menubar", group = "launcher"}),
+    -- Application launcher
+    awful.key({ modkey }, "r", function() awful.spawn.with_shell("sh ${HOME}/.config/awesome/scripts/dmenu.sh") end,
+              {description = "show dmenu", group = "launcher"}),
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show drun") end,
+              {description = "run rofi in drun mode", group = "launcher"}),
+    awful.key({ modkey, 'Shift' }, "space", function() awful.spawn.with_shell("rofi -show run") end,
+              {description = "run rofi in run mode", group = "launcher"}),
+    awful.key({ modkey }, "=", function() awful.spawn.with_shell("rofi -show calc") end,
+              {description = "run rofi in calculator mode", group = "launcher"}),
+    awful.key({ modkey }, "w", function() awful.spawn.with_shell("rofi -show window") end,
+              {description = "run rofi in window mode", group = "launcher"}),
     -- Firefox
     awful.key({ modkey }, "b", function () awful.spawn.with_shell("firefox") end,
               {description = "opens Firefox", group = "launcher"}),

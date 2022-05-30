@@ -3,19 +3,20 @@ export ZSH="/home/coffee/.oh-my-zsh"
 ZSH_THEME="jnrowe"
 
 plugins=(
-	adb
-	ansible
-	aws
-	bgnotify
+  adb
+  ansible
+  aws
+  bgnotify
   dnf
-	docker-compose
-	git
-	terraform
-	thefuck
-	vagrant
-	wd
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+  docker-compose
+  git
+  systemd
+  terraform
+  thefuck
+  vagrant
+  wd
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -37,11 +38,15 @@ alias pf="pfetch"
 alias cd1="cd ../ && ls"
 alias cd2="cd ../../ && ls"
 alias cd3="cd ../../../ && ls"
-alias cd2="cd ../../../../ && ls"
+alias cd4="cd ../../../../ && ls"
+alias setkb="setxkbmap -model abnt2 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"
+alias clima="curl pt-br.wttr.in"
 # Work
 alias apb='ansible-playbook'
 alias v='nvim'
-alias cpid="cat .ssh/id_ed25519.pub | xclip -selection clipboard"
+alias lv='lvim'
+alias cpid="cat ~/.ssh/id_ed25519.pub | xclip -selection clipboard"
+alias open-android="android-studio src-cordova/platforms/android > /dev/null 2>&1 &"
 # Nord
 alias nv="nordvpn"
 alias nvc="nordvpn connect"
@@ -50,9 +55,10 @@ alias nvd="nordvpn disconnect"
 alias nvds="nordvpn status && nordvpn disconnect"
 alias nvs="nordvpn status"
 
-# Loads NVM and RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Loads nvm, rvm and fzf
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Env Vars
 # Defaults
@@ -62,7 +68,8 @@ export BROWSER="firefox"
 export TERM="xterm-256color"
 # Path
 export PATH=${PATH}:$HOME/.local/bin
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="$PATH:$HOME/.config/scripts"
 # Android
 export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
@@ -80,6 +87,7 @@ export GPG_TTY=$(tty)
 export CLOUDSDK_PYTHON=python2
 
 # Should run everytime
-cat ~/.cache/wal/sequences 2>/dev/null 2&>1
+# cat ~/.cache/wal/sequences 2>/dev/null 2&>1
+(cat ~/.cache/wal/sequences &)
 eval $(thefuck --alias)
 eval "$(starship init zsh)"

@@ -1,0 +1,10 @@
+session: personal
+
+root: ~/code/personal
+
+windows:
+  - name: monitoring
+    commands:
+      - htop
+  - name: ricing
+    root: ~/.config

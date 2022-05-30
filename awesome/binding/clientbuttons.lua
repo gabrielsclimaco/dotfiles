@@ -20,6 +20,14 @@ function _M.get()
         c:emit_signal("request::activate", "mouse_click", {raise = true})
         awful.mouse.client.resize(c)
     end)
+    -- awful.button({ }, 6, function (c)
+    --     c:emit_signal("request::activate", "mouse_click", {raise = true})
+    --     awful.tag.viewprev
+    -- end),
+    -- awful.button({ }, 7, function (c)
+    --     c:emit_signal("request::activate", "mouse_click", {raise = true})
+    --     awful.tag.viewnext
+    -- end)
   )
 
   return clientbuttons
