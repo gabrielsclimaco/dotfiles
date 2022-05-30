@@ -7,6 +7,7 @@ plugins=(
 	ansible
 	aws
 	bgnotify
+  dnf
 	docker-compose
 	git
 	terraform

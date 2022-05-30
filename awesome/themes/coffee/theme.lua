@@ -13,7 +13,7 @@ dofile(theme_path .. "layouts.lua")
 
 -- Wallpaper is set by pywal
 -- theme.wallpaper          = theme_path .. "background.png"
-theme.awesome_icon       = theme_path .. "launcher/archlinux_logo.png"
-theme.awesome_subicon    = theme_path .. "launcher/archlinux_logo.png"
+theme.awesome_icon       = theme_path .. "launcher/fedora_logo.png"
+theme.awesome_subicon    = theme_path .. "launcher/fedora_logo.png"
 
 return theme

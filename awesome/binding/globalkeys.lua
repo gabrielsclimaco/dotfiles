@@ -188,7 +188,7 @@ function _M.get()
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Application launcher (dmenu)
-    awful.key({ modkey }, "space", function() awful.spawn.with_shell("sh ${HOME}/.config/awesome/scripts/dmenu.sh") end,
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show run") end,
               {description = "show the menubar", group = "launcher"}),
     -- Firefox
     awful.key({ modkey }, "b", function () awful.spawn.with_shell("firefox") end,
