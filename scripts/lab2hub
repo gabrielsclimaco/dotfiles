@@ -1,0 +1,11 @@
+#!/bin/bash
+
+GITLAB_REPO=$1
+GITHUB_REPO=$2
+DIR_NAME=$(awk -F'/' '$0=$NF' <<< "$GITLAB_REPO")
+
+cd /tmp
+
+git clone --mirror $GITLAB_REPO
+cd $DIR_NAME
+git push --mirror $GITHUB_REPO

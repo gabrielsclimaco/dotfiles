@@ -116,7 +116,7 @@ beautiful.notification_icon_size = 100
 -- {{{ Startup apps and scripts
 awful.spawn.with_shell("picom --experimental-backends")
 awful.spawn.with_shell("wal -R")
-awful.spawn.with_shell("feh --bg-fill ~/Imagens/Wallpapers/current/wallpaper.webp")
+awful.spawn.with_shell("feh --bg-fill ~/Imagens/Wallpapers/current/wallpaper.png")
 awful.spawn.with_shell("flameshot &")
 awful.spawn.with_shell("copyq &")
 -- }}}
