@@ -15,3 +15,5 @@ cp ~/.cache/wal/colors.Xresources ~/.Xresources
 sed -i "s/current\/wallpaper.*/current\/wallpaper.$ext\")/" ~/.config/awesome/rc.lua
 # Update firefox theme
 pywalfox update
+# Update betterlockscreen wallpaper
+betterlockscreen -u ~/Imagens/Wallpapers/current/wallpaper.$ext --fx blur
