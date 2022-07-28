@@ -5,6 +5,6 @@ root: ~/code/personal
 windows:
   - name: monitoring
     commands:
-      - htop
+      - gotop
   - name: ricing
     root: ~/.config

@@ -6,5 +6,6 @@ windows:
   - name: suporte
   - name: bugs
     layout: main-vertical
-    panes:
-      - root: .
+  - name: WLs
+    root: ./white-label-app
+    layout: main-vertical
