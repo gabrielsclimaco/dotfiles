@@ -9,7 +9,7 @@ local naughty = require("naughty")
 
 -- Fonts
 theme.font = "Hack Nerd Font 14"
-theme.taglist_font = "Hack Nerd Font Mono 16"
+theme.taglist_font = "Hack Nerd Font Mono 18"
 
 -- Taglist
 -- theme.bg_normal     = xrdb.background .. "ee" -- "ee" for transparency
@@ -24,11 +24,11 @@ theme.bg_normal     = xrdb.background
 -- theme.fg_urgent     = xrdb.background
 -- theme.fg_minimize   = xrdb.background
 
-theme.taglist_bg_focus = xrdb.color6
+theme.taglist_bg_focus = xrdb.color2
 theme.taglist_fg_focus = xrdb.color0
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(6)
+local taglist_square_size = dpi(12)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, xrdb.color1
 )
@@ -37,7 +37,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 )
 
 -- Gaps
-theme.useless_gap = 5
+theme.useless_gap = 8
 
 -- Borders
 theme.border_width  = 1
@@ -59,3 +59,15 @@ theme.menu_fg_focus  = xrdb.background
 
 theme.menu_border_color = xrdb.color4
 theme.menu_border_width = 1
+
+-- Notifications
+local rrect = function(radius)
+    return function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, radius)
+    end
+end
+
+theme.notification_icon_size    = 100
+theme.notification_border_width = 0
+theme.notification_border_color = xrdb.background
+-- theme.notification_shape        = rrect(10)

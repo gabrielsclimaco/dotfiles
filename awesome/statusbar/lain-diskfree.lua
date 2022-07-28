@@ -1,10 +1,3 @@
---[[
-     Original Source Modified From: github.com/copycat-killer
-     https://github.com/copycat-killer/awesome-copycats/blob/master/rc.lua.copland
---]]
-
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
 -- Standard awesome library
 local awful     = require("awful")
 local beautiful = require("beautiful")

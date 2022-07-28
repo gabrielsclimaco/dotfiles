@@ -1,113 +1,53 @@
--- {{{ Required libraries
 -- Standard awesome library
 local awful     = require("awful")
 local beautiful = require("beautiful")
 
 -- Wibox handling library
 local wibox = require("wibox")
-local lain  = require("lain")
 
 -- Custom Local Library
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
--- local xrdb = xresources.get_current_theme()
-require("statusbar.lain")
--- }}}
+local xrdb = xresources.get_current_theme()
 
-local WB = wibox_package
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local cws = clone_widget_set
-local cis = clone_icon_set
+-- split module, to make each file shorter,
+-- all must have same package name
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+local W = {}
+clone_widget_set = W           -- object name
 
-function WB.initdeco ()
-    -- Spacer
-    WB.spacer = wibox.widget.textbox(" ")
+local I = {}
+clone_icon_set = I             -- object name
 
-    -- Separators lain
-    -- local separators  = lain.util.separators
-    -- local arrow_color = gmc.color['red300']
-    -- WB.arrow_dl = separators.arrow_left("alpha", arrow_color)
-    -- WB.arrow_ld = separators.arrow_left(arrow_color, "alpha")
-    -- WB.arrow_dr = separators.arrow_right("alpha", arrow_color)
-    -- WB.arrow_rd = separators.arrow_right(arrow_color, "alpha")
-end
+-- progress bar related widgets -- after global markup
+local config_path = awful.util.getdir("config") .. "statusbar/"
+-- Lain
+dofile(config_path .. "lain.lua")
+dofile(config_path .. "lain-battery.lua")
+dofile(config_path .. "lain-diskfree.lua")
+dofile(config_path .. "lain-sound.lua")
+-- Custom
+dofile(config_path .. "brightness.lua")
+dofile(config_path .. "power-menu.lua")
+dofile(config_path .. "update-checker.lua")
+  dofile(config_path .. "vpn.lua")
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+-- Keyboard layout indicator
+W.keyboardlayout = awful.widget.keyboardlayout()
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- Keyboard map indicator and switcher
-mysystray = wibox.container.margin(
-  wibox.widget.systray(),
+-- Keyboard layout indicator
+I.systray = wibox.widget.systray()
+
+W.systray = wibox.container.margin(
+  I.systray,
   dpi(4),
   dpi(4),
   dpi(4),
   dpi(4)
 )
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-function WB.add_widgets_left (s)
-  return { -- Left widgets
-    layout = wibox.layout.fixed.horizontal,
-    RC.launcher,
-    WB.spacer,
-    s.taglist,
-    s.promptbox,
-  }
-end
-
-function WB.add_widgets_middle (s)
-  return {
-    layout = wibox.layout.fixed.horizontal,
-    --  Datetime
-    cws.clockwidget,
-  } 
-end
-
-function WB.add_widgets_right (s)
-  return { -- Right widgets
-    layout = wibox.layout.fixed.horizontal,
-
-    --  network traffic
-    cis.netdown, cws.netdowninfo,
-    cis.netup,   cws.netupinfo,
-
-    WB.spacer,
-
-    -- memory
-    cis.mem,     cws.mem,
-
-    WB.spacer,
-
-    -- cpu
-    cis.cpu,     cws.cpu,
-
-    WB.spacer,
-
-    -- disk usage
-    cis.fs,      cws.fs,
-
-    WB.spacer,
-
-    --  mpd
-    -- cis.mpd,     cws.mpd,
-
-    --  volume
-    cis.volume_dynamic,  cws.volumewidget,
-    
-    -- notification systray
-    mysystray,
-
-    -- keyboard layout
-    mykeyboardlayout,
-
-    -- layout indicator
-    s.layoutbox,
-  }
-end

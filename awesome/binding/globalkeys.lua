@@ -12,6 +12,11 @@ local terminal = RC.vars.terminal
 
 local _M = {}
 
+require("statusbar.widgets")
+
+local W = clone_widget_set     -- object name
+local I = clone_icon_set       -- object name
+
 -- reading
 -- https://awesomewm.org/wiki/Global_Keybindings
 
@@ -43,8 +48,6 @@ function _M.get()
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    -- awful.key({ modkey,           }, "w", function () RC.mainmenu:show() end,
-    --           {description = "show main menu", group = "awesome"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Layout manipulation
@@ -90,10 +93,6 @@ function _M.get()
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    -- awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-    --           {description = "select next", group = "layout"}),
-    -- awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-    --           {description = "select previous", group = "layout"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
@@ -122,9 +121,8 @@ function _M.get()
               {description = "lua execute prompt", group = "awesome"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    -- Floating windows
     -- Resize
-    --awful.key({ modkey, "Control" }, "Left",  function () awful.client.moveresize( 20,  20, -40, -40) end),
-    --awful.key({ modkey, "Control" }, "Right", function () awful.client.moveresize(-20, -20,  40,  40) end),
     awful.key({ modkey, "Control" }, "Down",
               function () awful.client.moveresize( 0, 0, 0, -20) end,
               {description = "decrease size vertically", group = "floating window"}),
@@ -183,6 +181,13 @@ function _M.get()
                 awful.spawn.with_shell("playerctl previous")
               end,
               {description = "play previous", group = "media"}),
+    -- Screen
+    awful.key({}, "XF86MonBrightnessUp",
+              function () W.brightness:inc() end,
+              {description = "increase brightness", group = "screen"}),
+    awful.key({}, "XF86MonBrightnessDown",
+              function () W.brightness:dec() end,
+              {description = "decrease brightness", group = "screen"}),
 
     --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     -- Application launcher
@@ -201,8 +206,14 @@ function _M.get()
               {description = "opens Firefox", group = "launcher"}),
     -- Flameshot
     awful.key({}, "Print", function () awful.spawn.with_shell("flameshot gui") end,
-              {description = "opens Flameshot (screeshot tool)", group = "launcher"})
-
+              {description = "opens Flameshot (screeshot tool)", group = "launcher"}),
+    --   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    -- Other
+    awful.key({ modkey }, "BackSpace",
+              function ()
+                  I.systray.visible = not I.systray.visible
+              end,
+              {description = "toggle systray", group = "other"})
   )
 
   return globalkeys
