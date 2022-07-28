@@ -8,6 +8,7 @@
 !alacritty/
 !awesome/
 awesome/lain
+!lvim/
 # Only adds nvim/init.vim
 !nvim/
 nvim/*
