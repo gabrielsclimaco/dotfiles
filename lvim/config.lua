@@ -12,6 +12,7 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "pywal"
+lvim.lsp.diagnostics.virtual_text = false
 vim.opt.clipboard = "unnamed"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -20,6 +21,14 @@ vim.opt.clipboard = "unnamed"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<Tab>"] = "gt"
+lvim.keys.normal_mode["<S-Tab>"] = "gT"
+lvim.keys.normal_mode["<C-x>"] = ":BufferKill<CR>"
+
+lvim.keys.visual_mode["<C-c>"] = "\"+y<cr>"
+lvim.keys.visual_mode["<C-x>"] = "\"+x<cr>"
+
+lvim.keys.insert_mode["<C-v>"] = "<esc>\"+pa"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -45,15 +54,23 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["W"] = { "<cmd>set wrap!<CR>", "Toggle wrap" }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+}
+
+-- Statusline settings
+local components = require("lvim.core.lualine.components")
+
+lvim.builtin.lualine.sections.lualine_y = {
+  components.location
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -84,6 +101,20 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
+require('lspconfig').yamlls.setup {
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+      },
+    },
+    yml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+      },
+    },
+  }
+}
 
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.automatic_servers_installation = false
@@ -154,6 +185,8 @@ lvim.plugins = {
     'AlphaTechnolog/pywal.nvim',
     as = 'pywal',
   },
+  { 'terryma/vim-multiple-cursors' },
+  { 'towolf/vim-helm' },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
