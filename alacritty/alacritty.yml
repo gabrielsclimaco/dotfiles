@@ -10,7 +10,7 @@ scrolling:
 
 # Font
 font:
-  size: 14.0
+  size: 16.0
   normal:
     family: Hack Nerd Font Mono
     style: Regular
@@ -31,7 +31,6 @@ cursor:
     blinking: On
   blink_interval: 750
   unfocused_hollow: true
-
 # Colors (Ayu Mirage) - check https://github.com/alacritty/alacritty/wiki/Color-schemes
 # colors:
 #   # Default colors
