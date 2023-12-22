@@ -2,7 +2,7 @@ configuration {
   modi: "window,run,ssh,drun,calc:/home/coffee/.config/rofi/scripts/rofi-calc.sh";
 	font: "Hack Nerd Font Mono 16";
 	show-icons: true;
-  icon-theme: "Numix-Circle";
+  icon-theme: "Zafiro-Icons-Dark";
 
   display-ssh:    "";
   display-run:    "";
