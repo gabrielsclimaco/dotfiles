@@ -10,12 +10,12 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = false
-lvim.colorscheme = "pywal"
--- lvim.lsp.diagnostics.virtual_text = false
-vim.opt.clipboard = "unnamed"
+lvim.format_on_save.enabled = true
+-- lvim.colorscheme = "pywal"
+lvim.colorscheme = "catppuccin-mocha"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
+vim.opt.clipboard = "unnamed"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -24,9 +24,18 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<Tab>"] = "gt"
 lvim.keys.normal_mode["<S-Tab>"] = "gT"
 lvim.keys.normal_mode["<C-x>"] = ":BufferKill<CR>"
+lvim.keys.normal_mode["<C-t>"] = ":ToggleTerm<CR>"
+
+lvim.keys.insert_mode["kj"] = "<esc>"
+lvim.keys.insert_mode["kk"] = "<esc>"
+lvim.keys.insert_mode["jj"] = "<esc>"
 
 lvim.keys.visual_mode["<C-c>"] = "\"+y<cr>"
 lvim.keys.visual_mode["<C-x>"] = "\"+x<cr>"
+-- Move selected line / block of text in visual mode
+lvim.keys.visual_mode["<S-k>"] = ":move '<-2<CR>gv-gv"
+lvim.keys.visual_mode["<S-j>"] = ":move '>+1<CR>gv-gv"
+
 
 lvim.keys.insert_mode["<C-v>"] = "<esc>\"+pa"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
@@ -55,9 +64,15 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 --   },
 -- }
 
+-- Change theme settings
+-- lvim.builtin.theme.options.dim_inactive = true
+-- lvim.builtin.theme.options.style = "storm"
+
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["a"] = { "<cmd>LvimToggleFormatOnSave<CR>", "Toggle format on save" }
 lvim.builtin.which_key.mappings["W"] = { "<cmd>set wrap!<CR>", "Toggle wrap" }
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -68,21 +83,23 @@ lvim.builtin.which_key.mappings["t"] = {
   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 
--- Statusline settings
-local components = require("lvim.core.lualine.components")
-
-lvim.builtin.lualine.sections.lualine_y = {
-  components.location
+lvim.builtin.which_key.mappings["n"] = {
+  name = "+Neogen",
+  n = { "<cmd>Neogen<cr>", "Neogen" },
+  f = { "<cmd>Neogen func<cr>", "Neogen func" },
+  c = { "<cmd>Neogen class<cr>", "Neogen class" },
+  t = { "<cmd>Neogen type<cr>", "Neogen type" },
+  F = { "<cmd>Neogen file<cr>", "Neogen file" },
 }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
--- lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
+lvim.builtin.nvimtree.setup.view.side = "right"
+lvim.builtin.nvimtree.setup.view.width = 50
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -101,7 +118,7 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.highlight.enable = true
 lvim.builtin.treesitter.context_commentstring.enable = true
 
 -- generic LSP settings
@@ -121,10 +138,9 @@ require('lspconfig').yamlls.setup {
 }
 
 -- -- make sure server will always be installed even if the server is in skipped_servers list
--- lvim.lsp.installer.setup.ensure_installed = {
---     "sumeko_lua",
---     "jsonls",
--- }
+lvim.lsp.installer.setup.ensure_installed = {
+  "jsonls",
+}
 -- -- change UI setting of `LspInstallInfo`
 -- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
 -- lvim.lsp.installer.setup.ui.check_outdated_servers_on_open = false
@@ -160,20 +176,38 @@ require('lspconfig').yamlls.setup {
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
+  {
+    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "prettier",
+    ---@usage arguments to pass to the formatter
+    extra_args = {
+      '--config-precedence=file-override',
+      '--single-quote',
+      '--trailing-comma=all',
+    },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = {
+      "lua",
+      "typescript",
+      "typescriptreact",
+      "javascript",
+      "javascriptreact",
+      "css",
+      "scss",
+      "sass",
+      "json",
+      "markdown",
+      "vue",
+      "yaml",
+      "html",
+      "pug",
+    },
+  },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -210,7 +244,7 @@ lvim.plugins = {
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
-      require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
+      require("colorizer").setup({ "css", "scss", "sass", "html", "javascript", "vue" }, {
         RGB = true, -- #RGB hex codes
         RRGGBB = true, -- #RRGGBB hex codes
         RRGGBBAA = true, -- #RRGGBBAA hex codes
@@ -221,16 +255,51 @@ lvim.plugins = {
       })
     end,
   },
+  {
+    'glepnir/zephyr-nvim',
+  },
+  {
+    'mhartington/oceanic-next',
+  },
+  {
+    'projekt0n/github-nvim-theme',
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+  },
+  {
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup({})
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    as = "catppuccin",
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup {
+          panel = { auto_refresh = true },
+          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+        }
+      end, 100)
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua", "nvim-cmp" },
+  },
 }
 
+-- Can not be placed into the config method of the plugins.
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
+
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands = {
---   "BufWritePre", -- see `:h autocmd-events`
---   { -- this table is passed verbatim as `opts` to `nvim_create_autocmd`
---       pattern = { "*" }, -- see `:h autocmd-events`
---       command = "%s/\\s\\+$//e",
---   }
--- }
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*" },
   -- trim whitespaces on save
