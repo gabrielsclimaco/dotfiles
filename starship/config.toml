@@ -1,4 +1,6 @@
 add_newline = false
+# format = '$all$kubernetes$container$shell$character'
+right_format='$kubernetes$gcloud'
 
 [line_break]
 disabled = false
@@ -10,6 +12,7 @@ error_symbol = "[](bold red) "
 
 [aws]
 symbol = " "
+format = '| [$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 
 [directory]
 read_only = " "
@@ -20,7 +23,8 @@ symbol = " "
 
 [gcloud]
 symbol = " "
-format = "[$symbol(($region))]($style)"
+format = "| [$symbol$account(@$domain)(($region))]($style)"
+# format = "[$symbol(($region))]($style)"
 
 [git_branch]
 symbol = " "
@@ -30,6 +34,12 @@ symbol = " "
 
 [java]
 symbol = " "
+
+[kubernetes]
+disabled = false
+format = "[$symbol$context( ($namespace))]($style) "
+[kubernetes.context_aliases]
+'arn:aws:eks:us-east-1:277048801940:cluster/gitlab' = 'gitlab-runners'
 
 [lua]
 symbol = " "
@@ -46,6 +56,6 @@ symbol = " "
 [ruby]
 symbol = " "
 
-[terraform]
-symbol = "" 
-format = "via [$symbol $version]($style) "
+# [terraform]
+# symbol = ""
+# format = "via [$symbol $version]($style) "
