@@ -5,9 +5,12 @@ filepath=$1
 filename=$(basename "$filepath")
 ext="${filename##*.}"
 
+# Generate color scheme
+wal -i $filepath
+
 # Copy wallapaper and generate color scheme
 cp $filepath ~/Imagens/Wallpapers/current/wallpaper.$ext
-wal -i ~/Imagens/Wallpapers/current/wallpaper.$ext
+# wal -i ~/Imagens/Wallpapers/current/wallpaper.$ext
 
 # Update theme
 cp ~/.cache/wal/colors.Xresources ~/.Xresources

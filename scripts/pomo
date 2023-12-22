@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Defina o tempo em minutos
+tempo=25
+
+# Exibe uma mensagem para o usuário
+echo "Começando os trabalhos: $tempo minutos..."
+
+# Converte o tempo em segundos
+tempo_em_segundos=$((tempo * 60))
+
+# Executa um loop de contagem regressiva
+while [ $tempo_em_segundos -gt 0 ]; do
+  # Mostra o tempo restante a cada segundo
+  echo "Tempo restante: $tempo_em_segundos segundos..."
+  sleep 1
+  tempo_em_segundos=$((tempo_em_segundos - 1))
+done
+
+# Exibe uma mensagem de finalização
+notify-send "Chega de trabalho, sai do PC arrombado!"
+echo "Temporizador Pomodoro finalizado!"

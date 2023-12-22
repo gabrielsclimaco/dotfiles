@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $EUID != 0 ]; then
+    sudo "$0" "$@"
+    exit $?
+fi
+
+cowsay "Atualizando pacotes DNF"
+sudo dnf upgrade -y
+
+cowsay "Atualizando pacotes Flatpak"
+flatpak update
+
+# cowsay "Limpando cache DNF"
+# sudo dnf clean all
