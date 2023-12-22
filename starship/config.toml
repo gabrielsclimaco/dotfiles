@@ -15,8 +15,8 @@ symbol = " "
 format = '| [$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 
 [directory]
-read_only = " "
-home_symbol = ""
+read_only = " 󰋜"
+home_symbol = "󰋜"
 
 [docker_context]
 symbol = " "
