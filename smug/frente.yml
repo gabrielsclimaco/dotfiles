@@ -1,0 +1,11 @@
+session: frente
+
+root: ~/code/zrp/frente
+
+windows:
+  - name: terraform
+    root: ./iac/microservices
+    commands:
+      - export AWS_PROFILE=frente-prod
+  - name: simple
+    root: ./whitelabel

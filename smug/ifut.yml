@@ -4,8 +4,24 @@ root: ~/code/ifut
 
 windows:
   - name: suporte
-  - name: bugs
-    layout: main-vertical
-  - name: WLs
-    root: ./white-label-app
-    layout: main-vertical
+  - name: code
+  # - name: api
+  #   root: ./rails-api
+  #   layout: main-vertical
+  #   panes:
+  #     - root: .
+  # - name: organizer
+  #   root: ./organizer-panel
+  #   layout: main-vertical
+  #   panes:
+  #     - root: .
+  # - name: times
+  #   root: ./team-panel
+  #   layout: main-vertical
+  #   panes:
+  #     - root: .
+  # - name: WLs
+  #   root: ./white-label-app
+  #   layout: main-vertical
+  #   panes:
+  #     - root: .
