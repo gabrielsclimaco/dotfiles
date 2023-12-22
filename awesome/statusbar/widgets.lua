@@ -32,7 +32,7 @@ dofile(config_path .. "lain-sound.lua")
 dofile(config_path .. "brightness.lua")
 dofile(config_path .. "power-menu.lua")
 dofile(config_path .. "update-checker.lua")
-  dofile(config_path .. "vpn.lua")
+dofile(config_path .. "vpn.lua")
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 

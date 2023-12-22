@@ -24,16 +24,16 @@ theme.bg_normal     = xrdb.background
 -- theme.fg_urgent     = xrdb.background
 -- theme.fg_minimize   = xrdb.background
 
-theme.taglist_bg_focus = xrdb.color2
+theme.taglist_bg_focus = xrdb.color10
 theme.taglist_fg_focus = xrdb.color0
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(12)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, xrdb.color1
+    taglist_square_size, xrdb.color9
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, xrdb.color1
+    taglist_square_size, xrdb.color9
 )
 
 -- Gaps
@@ -43,7 +43,7 @@ theme.useless_gap = 8
 theme.border_width  = 1
 
 theme.border_normal = xrdb.color0
-theme.border_focus  = xrdb.color4
+theme.border_focus  = xrdb.color2
 theme.border_marked = xrdb.color1
 
 -- Menu
@@ -54,7 +54,7 @@ theme.menu_width  = 180     -- dpi(100)
 --theme.menu_context_height = 20
 
 theme.menu_bg_normal = xrdb.background
-theme.menu_bg_focus  = xrdb.color2
+theme.menu_bg_focus  = xrdb.color10
 theme.menu_fg_focus  = xrdb.background
 
 theme.menu_border_color = xrdb.color4

@@ -22,7 +22,7 @@ local xrdb = xresources.get_current_theme()
 local script_path = awful.util.getdir("config") .. "scripts/check-vpn.sh"
 
 I.vpn = wibox.widget.textbox(
-  markup(xrdb.color2, "歷 "))
+  markup(xrdb.color10, "歷 "))
 
 W.vpn = awful.widget.watch(
     script_path,
@@ -34,13 +34,13 @@ W.vpn = awful.widget.watch(
         if response_code == disconnected_code then
             widget:set_markup(
               markup.bold(
-                markup(xrdb.color7, "Off ")))
-            I.vpn:set_markup(markup(xrdb.color2, "轢 "))
+                markup(xrdb.color15, "Off ")))
+            I.vpn:set_markup(markup(xrdb.color10, "轢 "))
         else
             widget:set_markup(
               markup.bold(
-                markup(xrdb.color7, "On ")))
-            I.vpn:set_markup(markup(xrdb.color2, "歷 "))
+                markup(xrdb.color15, "On ")))
+            I.vpn:set_markup(markup(xrdb.color10, "歷 "))
         end
     end
 )

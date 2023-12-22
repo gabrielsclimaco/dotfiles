@@ -28,12 +28,12 @@ local xrdb = xresources.get_current_theme()
 -- Battery
 
 I.bat = wibox.widget.textbox(
-  markup(xrdb.color2, " "))
+  markup(xrdb.color10, " "))
 
 W.bat = lain.widget.bat({
     settings = function()
-        local perc_color = xrdb.color7
-        local icon_color = xrdb.color2
+        local perc_color = xrdb.color15
+        local icon_color = xrdb.color10
 
         if bat_now.perc == "N/A" then
             perc = "AC "

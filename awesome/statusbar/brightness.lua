@@ -55,19 +55,19 @@ W.brightness = wibox.widget({
 
     self:get_children_by_id('percentage')[1]:set_markup(
         markup.bold(
-            markup(xrdb.color7, display_level)))
+            markup(xrdb.color15, display_level)))
 
     low_level = base / 2
     high_level = base * 3 / 2
     if level <= low_level then
         self:get_children_by_id('icon')[1]:set_markup(
-              markup(xrdb.color2, " "))
+              markup(xrdb.color10, " "))
     elseif level > low_level and level <= high_level then
         self:get_children_by_id('icon')[1]:set_markup(
-              markup(xrdb.color2, " "))
+              markup(xrdb.color10, " "))
     else
         self:get_children_by_id('icon')[1]:set_markup(
-              markup(xrdb.color2, " "))
+              markup(xrdb.color10, " "))
     end
   end
 })

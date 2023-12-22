@@ -21,7 +21,7 @@ local xrdb = xresources.get_current_theme()
 -- / fs
 
 I.fs = wibox.widget.textbox(
-  markup(xrdb.color2, " "))
+  markup(xrdb.color10, " "))
 
 --
 -- Can't create more than one fs widget
@@ -30,7 +30,7 @@ W.fs = lain.widget.fs({
   settings  = function()
     widget:set_markup(
       markup.bold(
-        markup(xrdb.color7, fs_now["/"].percentage .. "% ")))
+        markup(xrdb.color15, fs_now["/"].percentage .. "% ")))
   end,
   notification_preset = {
     fg = xrdb.foreground,

@@ -21,13 +21,13 @@ local xrdb = xresources.get_current_theme()
 
 -- MEM
 I.mem = wibox.widget.textbox(
-  markup(xrdb.color2, " "))
+  markup(xrdb.color10, " "))
 
 W.mem = lain.widget.mem({
   settings = function()
     widget:set_markup(
       markup.bold(
-        markup(xrdb.color7, mem_now.perc .. "% ")))
+        markup(xrdb.color15, mem_now.perc .. "% ")))
   end
 })
 
@@ -35,13 +35,13 @@ W.mem = lain.widget.mem({
 
 -- CPU
 I.cpu = wibox.widget.textbox(
-  markup(xrdb.color2, " "))
+  markup(xrdb.color10, " "))
 
 W.cpu = lain.widget.cpu({
   settings = function()
     widget:set_markup(
       markup.bold(
-        markup(xrdb.color7, cpu_now.usage .. "% ")))
+        markup(xrdb.color15, cpu_now.usage .. "% ")))
   end
 })
 
@@ -49,7 +49,7 @@ W.cpu = lain.widget.cpu({
 
 -- Textclock
 
-I.iconclock = wibox.widget.textbox(markup(xrdb.color2, " "))
+I.iconclock = wibox.widget.textbox(markup(xrdb.color10, " "))
 
 W.textclock = wibox.widget.textclock(
   markup.bold("%A %d %B " .. "-" .. " %H:%M "))
@@ -87,17 +87,17 @@ W.calendar = lain.widget.cal({
 
 -- Net
 I.netdown = wibox.widget.textbox(
-  markup(xrdb.color2, " ﲐ"))
+  markup(xrdb.color10, " ﲐ"))
 
 W.netdowninfo = wibox.widget.textbox()
 
 I.netup = wibox.widget.textbox(
-  markup(xrdb.color2, " ﲓ"))
+  markup(xrdb.color10, " ﲓ"))
 
 W.netupinfo = lain.widget.net({
     settings = function()
-        local fg_color_up   = xrdb.color7
-        local fg_color_down = xrdb.color7
+        local fg_color_up   = xrdb.color15
+        local fg_color_down = xrdb.color15
 
         widget:set_markup(
           markup.bold(

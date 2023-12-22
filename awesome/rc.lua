@@ -104,7 +104,7 @@ statusbar()
 -- {{{ Startup apps and scripts
 awful.spawn.with_shell("picom --experimental-backends")
 awful.spawn.with_shell("wal -R")
-awful.spawn.with_shell("feh --bg-fill ~/Imagens/Wallpapers/current/wallpaper.png")
+awful.spawn.with_shell("feh --bg-fill ~/Imagens/Wallpapers/current/wallpaper.jpg")
 awful.spawn.with_shell("pkill flameshot && flameshot &")
 awful.spawn.with_shell("copyq &")
 awful.spawn.with_shell("xinput set-prop \"ELAN0B00:00 04F3:3192 Touchpad\" \"libinput Tapping Enabled\" 1")

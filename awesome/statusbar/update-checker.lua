@@ -24,7 +24,7 @@ local xrdb = xresources.get_current_theme()
 local script_path = awful.util.getdir("config") .. "scripts/check-updates.sh"
 
 I.update_checker = wibox.widget.textbox(
-  markup(xrdb.color2, " "))
+  markup(xrdb.color10, " "))
 
 W.update_checker = awful.widget.watch(
     script_path,
@@ -34,11 +34,11 @@ W.update_checker = awful.widget.watch(
         local updates_code = 100
 
         if response_code == updates_code then
-            widget:set_markup(markup(xrdb.color7, " "))
-            I.update_checker:set_markup(markup(xrdb.color2, " "))
+            widget:set_markup(markup(xrdb.color15, " "))
+            I.update_checker:set_markup(markup(xrdb.color10, " "))
         else
-            widget:set_markup(markup(xrdb.color7, " "))
-            I.update_checker:set_markup(markup(xrdb.color2, " "))
+            widget:set_markup(markup(xrdb.color15, " "))
+            I.update_checker:set_markup(markup(xrdb.color10, " "))
         end
     end
 )

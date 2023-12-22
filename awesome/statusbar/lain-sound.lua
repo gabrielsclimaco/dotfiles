@@ -37,28 +37,28 @@ terminal = RC.vars.terminal
 
 
 I.volume_dynamic = wibox.widget.textbox(
-  markup(xrdb.color2, "墳 "))
+  markup(xrdb.color10, "墳 "))
 
 local volume_wibox_settings = function()
     if volume_now.status == "off" then
         I.volume_dynamic:set_markup_silently(
-          markup(xrdb.color2, "婢 "))
+          markup(xrdb.color10, "婢 "))
     elseif volume_now.level == 0 then
         I.volume_dynamic:set_markup_silently(
-          markup(xrdb.color2, "奄 "))
+          markup(xrdb.color10, "奄 "))
     elseif volume_now.level <= 50 then
         I.volume_dynamic:set_markup_silently(
-          markup(xrdb.color2, "奔 "))
+          markup(xrdb.color10, "奔 "))
     else
         I.volume_dynamic:set_markup_silently(
-          markup(xrdb.color2, "墳 "))
+          markup(xrdb.color10, "墳 "))
     end
 end
 
 local volume_wibox_colors = {
     background = xrdb.background,
     mute = xrdb.color1,
-    unmute = xrdb.color2
+    unmute = xrdb.color10
 }
 
 W.volume_wibox = lain.widget.alsabar({
@@ -97,7 +97,7 @@ W.volume_wibox.tooltip.wibox.fg = xrdb.background
 W.volume_wibox.bar:buttons(W.volume_wibox_buttons)
 
 W.volumebg = wibox.container.background(
-  W.volume_wibox.bar, xrdb.color7, gears.shape.rectangle)
+  W.volume_wibox.bar, xrdb.color15, gears.shape.rectangle)
 W.volumewidget = wibox.container.margin(
   W.volumebg, dpi(2), dpi(7), dpi(9), dpi(9))
 
@@ -125,7 +125,7 @@ W.volumewidget = wibox.container.margin(
 --             title  = ""
 --             I.mpd:set_image(nil)
 --         end
---         widget:set_markup(markup(xrdb.color2, artist)
+--         widget:set_markup(markup(xrdb.color10, artist)
 --             .. markup(xrdb.color6, title))
 --     end
 -- })
