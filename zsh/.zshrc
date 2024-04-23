@@ -1,5 +1,6 @@
 # Oh my ZSH config and plugins
-export ZSH="/home/coffee/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="/home/coffee/.oh-my-zsh"
 ZSH_THEME="jnrowe"
 
 plugins=(
@@ -81,6 +82,11 @@ alias ml="mullvad"
 alias mlc="mullvad connect && sleep 1 && mullvad status"
 alias mld="mullvad disconnect && sleep 1 && mullvad status"
 alias mls="mullvad status"
+# Kubernetes
+alias kn='kubectl config set-context --current --namespace'
+alias ktmp='kubectl run tmp -it --rm --restart Never --image'
+export do='--dry-run=client --o yaml'
+export now='--force --grace-period 0'
 
 # Loads nvm, rvm and fzf
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
@@ -116,6 +122,9 @@ export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 export JAVAC_HOME=$JAVA_HOME/bin/javac
 export PATH=${PATH}:/usr/lib64/openjdk-8/jre/bin
 export PATH=${PATH}:/usr/lib64/openjdk-8/bin
+# Go
+export GOPATH=$HOME/go
+export PATH=${PATH}:$GOPATH/bin
 # Others
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 export GPG_TTY=$(tty)
@@ -128,7 +137,7 @@ compinit
 # <<<<  Vagrant command completion (end)
 
 # Should run everytime
-cat ~/.cache/wal/sequences 2>/dev/null 2&>1
+cat ~/.cache/wal/sequences 2>/dev/null
 # (cat ~/.cache/wal/sequences &)
 eval $(thefuck --alias)
 eval "$(starship init zsh)"

@@ -4,24 +4,25 @@ window:
     x: 10
     y: 10
   decorations: none
+  option_as_alt: "Both"
 scrolling:
   history: 10000
   multiplier: 3
 
 # Font
 font:
-  size: 16.0
+  size: 20.0
   normal:
-    family: Hack Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Regular
   bold:
-    family: Hack Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Bold
   italic:
-    family: Hack Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Italic
   bold_italic:
-    family: Hack Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Bold Italic
 
 # Cursor
@@ -31,6 +32,10 @@ cursor:
     blinking: On
   blink_interval: 750
   unfocused_hollow: true
+
+# Theme
+import:
+  - "~/.config/alacritty/themes/catppuccin_macchiato.yaml"
 # Colors (Ayu Mirage) - check https://github.com/alacritty/alacritty/wiki/Color-schemes
 # colors:
 #   # Default colors

@@ -4,7 +4,16 @@ root: ~/code/ifut
 
 windows:
   - name: suporte
-  - name: code
+  - name: k8s
+    root: ./ops/k8s
+  - name: tf
+    root: ./ops/infrastructure-resources
+    commands:
+      - export AWS_PROFILE=ifut
+  - name: api
+    root: ./dev/rails-api
+  - name: front
+    root: ./dev/organizer-panel
   # - name: api
   #   root: ./rails-api
   #   layout: main-vertical
