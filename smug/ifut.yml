@@ -4,24 +4,11 @@ root: ~/code/ifut
 
 windows:
   - name: suporte
-  - name: code
-  # - name: api
-  #   root: ./rails-api
-  #   layout: main-vertical
-  #   panes:
-  #     - root: .
-  # - name: organizer
-  #   root: ./organizer-panel
-  #   layout: main-vertical
-  #   panes:
-  #     - root: .
-  # - name: times
-  #   root: ./team-panel
-  #   layout: main-vertical
-  #   panes:
-  #     - root: .
-  # - name: WLs
-  #   root: ./white-label-app
-  #   layout: main-vertical
-  #   panes:
-  #     - root: .
+  - name: k8s
+    root: ./ops/kubernetes-resources
+  - name: infra
+    root: ./ops/infra
+  - name: api
+    root: ./dev/rails-api
+  - name: front
+    root: ./dev/organizer-panel
