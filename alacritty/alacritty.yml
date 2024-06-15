@@ -31,6 +31,9 @@ cursor:
     blinking: On
   blink_interval: 750
   unfocused_hollow: true
+
+import:
+  - '~/.config/alacritty/themes/catppuccin_macchiato.yaml'
 # Colors (Ayu Mirage) - check https://github.com/alacritty/alacritty/wiki/Color-schemes
 # colors:
 #   # Default colors
