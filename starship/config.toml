@@ -38,8 +38,6 @@ symbol = " "
 [kubernetes]
 disabled = false
 format = "[$symbol$context( ($namespace))]($style) "
-[kubernetes.context_aliases]
-'arn:aws:eks:us-east-1:277048801940:cluster/gitlab' = 'gitlab-runners'
 
 [lua]
 symbol = " "
