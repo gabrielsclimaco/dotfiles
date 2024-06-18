@@ -235,7 +235,7 @@ lvim.plugins = {
   },
   {
     'AlphaTechnolog/pywal.nvim',
-    as = 'pywal',
+    name = 'pywal',
   },
   { 'terryma/vim-multiple-cursors' },
   { 'towolf/vim-helm' },
@@ -268,6 +268,9 @@ lvim.plugins = {
     'ellisonleao/gruvbox.nvim',
   },
   {
+    'norcalli/nvim-colorizer.lua',
+  },
+  {
     "danymat/neogen",
     config = function()
       require("neogen").setup({})
@@ -275,7 +278,7 @@ lvim.plugins = {
   },
   {
     "catppuccin/nvim",
-    as = "catppuccin",
+    name = "catppuccin",
   },
   {
     "zbirenbaum/copilot.lua",

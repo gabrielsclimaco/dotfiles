@@ -8,6 +8,23 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 
+
+def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
+    i = qtile.screens.index(qtile.current_screen)
+    if i != 0:
+        group = qtile.screens[i - 1].group.name
+        qtile.current_window.togroup(group, switch_group=switch_group)
+        if switch_screen == True:
+            qtile.cmd_to_screen(i - 1)
+
+def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
+    i = qtile.screens.index(qtile.current_screen)
+    if i + 1 != len(qtile.screens):
+        group = qtile.screens[i + 1].group.name
+        qtile.current_window.togroup(group, switch_group=switch_group)
+        if switch_screen == True:
+            qtile.cmd_to_screen(i + 1)
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -16,7 +33,6 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -30,24 +46,27 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
+    # Move between groups with mod + , and .
+    Key([mod],"comma", lazy.screen.prev_group(skip_empty = True), desc='Move focus to the previous not empty group'),
+    Key([mod],"period", lazy.screen.next_group(skip_empty = True), desc='Move focus to the next not empty group'),
+    Key([mod,"control"],  "comma",  lazy.screen.prev_group(), desc='Move focus to the previous group'),
+    Key([mod,"control"],  "period", lazy.screen.next_group(), desc='Move focus to the next group'),
+    # Rofi
+    Key([mod], "space", lazy.spawn("rofi -show drun"), desc="Show rofi application menu"),
+    Key([mod], "r", lazy.spawn("rofi -show run"), desc="Show rofi run menu"),
+    Key([mod], "w", lazy.spawn("rofi -show window"), desc="Show rofi windows menu"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    # Flameshot
+    Key([mod], "p", lazy.spawn("flameshot gui"), desc="Show rofi windows menu"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Change to next layout"),
     Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Change to previous layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    # Keyboard layout
+    Key([mod], "slash", lazy.spawn("setxkbmap -model abnt3 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"), desc="Set custom keyboard layout using setxkbmap"),
+    # Kill, reload and quit
+    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -77,55 +96,59 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=1, margin=8),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
-    layout.Stack(num_stacks=2),
-    layout.Bsp(),
-    layout.Matrix(),
+    # layout.Stack(num_stacks=2),
+    # layout.Bsp(),
+    # layout.Matrix(),
     # layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
-    layout.TreeTab(),
-    layout.VerticalTile(),
+    # layout.TreeTab(),
+    # layout.VerticalTile(),
     layout.Zoomy(),
-    layout.Spiral(),
+    # layout.Spiral(),
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
+    font="Hurmit Nerd Font Mono",
+    fontsize=14,
+    padding=4,
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
+        # top=bar.Bar(
+        #     [
+        #         widget.GroupBox(),
+        #         widget.Prompt(),
+        #         widget.WindowName(),
+        #         widget.Chord(
+        #             chords_colors={
+        #                 "launch": ("#ff0000", "#ffffff"),
+        #             },
+        #             name_transform=lambda name: name.upper(),
+        #         ),
+        #         # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+        #         # widget.StatusNotifier(),
+        #         widget.Systray(),
+        #         widget.Clock(format="%d/%m/%Y | %a - %I:%M:%S %p"),
+        #         widget.CurrentLayout(),
+        #         widget.QuickExit(),
+        #     ],
+        #     24,
+        #     # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+        #     # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        # ),
+        # bottom = bar.Gap(10),
+        # right = bar.Gap(10),
+        # left = bar.Gap(10),
+        top = bar.Gap(40),
+        wallpaper = "/home/coffee/Imagens/Wallpapers/Endy_vector_satelliet.png",
+        wallpaper_mode = "fill"
     ),
 ]
 
@@ -172,4 +195,4 @@ wl_input_rules = None
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+# wmname = "LG3D"

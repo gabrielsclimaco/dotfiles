@@ -6,10 +6,10 @@ windows:
   - name: vpn
     root: ./ops/vpn
   - name: ci
-    root: ./ops/iac/ci-cd
+    root: ./ops/ci-cd
   - name: terraform
-    root: ./ops/iac/microservices
+    root: ./ops/microservices
     commands:
       - export AWS_PROFILE=frente-prod
   - name: simple
-    root: ./dev/simple
+    root: ./dev
