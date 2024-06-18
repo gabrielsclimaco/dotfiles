@@ -213,7 +213,12 @@ function _M.get()
               function ()
                   I.systray.visible = not I.systray.visible
               end,
-              {description = "toggle systray", group = "other"})
+              {description = "toggle systray", group = "other"}),
+    awful.key({ modkey }, ".",
+              function ()
+                awful.spawn.with_shell("setxkbmap -model abnt2 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel")
+              end,
+              {description = "set keyboard us custom layout", group = "other"})
   )
 
   return globalkeys

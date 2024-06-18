@@ -12,7 +12,6 @@ plugins=(
   docker
   docker-compose
   fzf
-  gcloud
   git
   kubectl
   systemd
@@ -58,6 +57,8 @@ alias zshapply="source ~/.config/zsh/.zshrc"
 alias dps='docker ps'
 alias dit='docker exec -it'
 alias tfw='terraform workspace'
+alias tfs='terraform state'
+alias tfsrm='terraform state rm'
 alias apb='ansible-playbook'
 alias v='nvim'
 alias lv='lvim'
@@ -120,7 +121,7 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-export PATH=$PATH:/opt/gradle/gradle-7.4.2/bin
+export PATH=$PATH:/opt/gradle/gradle-8.8/bin
 # Java
 export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 export JAVAC_HOME=$JAVA_HOME/bin/javac
@@ -141,7 +142,12 @@ compinit
 # <<<<  Vagrant command completion (end)
 
 # Should run everytime
-cat ~/.cache/wal/sequences 2>/dev/null
 # (cat ~/.cache/wal/sequences &)
 eval $(thefuck --alias)
 eval "$(starship init zsh)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc'; fi

@@ -3,9 +3,13 @@ session: frente
 root: ~/code/zrp/frente
 
 windows:
+  - name: vpn
+    root: ./ops/vpn
+  - name: ci
+    root: ./ops/ci-cd
   - name: terraform
-    root: ./iac/microservices
+    root: ./ops/microservices
     commands:
       - export AWS_PROFILE=frente-prod
   - name: simple
-    root: ./whitelabel
+    root: ./dev

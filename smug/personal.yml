@@ -8,3 +8,5 @@ windows:
       - gotop
   - name: ricing
     root: ~/.config
+  - name: config
+    root: ~/ansible-desktop-config
