@@ -105,6 +105,10 @@ export PATH=${PATH}:$HOME/.local/bin
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:$HOME/.config/scripts"
 export PATH="$PATH:$HOME/.pulumi/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/snap/bin"
 export FLYCTL_INSTALL="/home/coffee/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 # iFut
