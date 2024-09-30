@@ -3,7 +3,6 @@ export ZSH="/home/coffee/.oh-my-zsh"
 ZSH_THEME="jnrowe"
 
 plugins=(
-  adb
   ansible
   aws
   bgnotify
@@ -58,10 +57,12 @@ alias dit='docker exec -it'
 alias tfw='terraform workspace'
 alias tfs='terraform state'
 alias tfsrm='terraform state rm'
+alias tffu='terraform force-unlock'
 alias apb='ansible-playbook'
 alias v='nvim'
 alias lv='lvim'
 alias py='python'
+alias code='codium'
 alias cpid="cat ~/.ssh/id_ed25519.pub | awk -F ' ' '{print \$1 \" \" \$2}' | xclip -selection clipboard"
 alias open-android="android-studio src-cordova/platforms/android > /dev/null 2>&1 &"
 alias wgup="sudo wg-quick up wg0"
@@ -108,9 +109,9 @@ export PATH="$PATH:$HOME/.pulumi/bin"
 export FLYCTL_INSTALL="/home/coffee/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 # iFut
-export hermes="ec2-user@hermes.ifut.com.br"
-export zagreus="ec2-user@zagreus.ifut.com.br"
-export services="root@metabase.ifut.com.br"
+export ra="ec2-user@ra.ifut.com.br"
+export neferite="ec2-user@neferite.ifut.com.br"
+export isis="ec2-user@isis.ifut.com.br"
 # Android
 export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
