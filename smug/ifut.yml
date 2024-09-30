@@ -7,7 +7,9 @@ windows:
   - name: k8s
     root: ./ops/kubernetes-resources
   - name: infra
-    root: ./ops/infra
+    root: ./ops/infrastructure-resources
+    commands:
+      - export AWS_PROFILE=ifut
   - name: api
     root: ./dev/rails-api
   - name: front

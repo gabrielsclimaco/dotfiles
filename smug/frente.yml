@@ -1,10 +1,10 @@
 session: frente
 
-root: ~/code/zrp/frente
+root: ~/code/frente
 
 windows:
   - name: vpn
-    root: ./ops/vpn
+    root: ./files/vpn
   - name: ci
     root: ./ops/ci-cd
   - name: terraform
