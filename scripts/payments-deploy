@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export TF_VAR_microservice_version=4.5.8-patch3
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 277048801940.dkr.ecr.us-east-1.amazonaws.com
+docker build -t payments:patch .
+docker tag payments:patch 277048801940.dkr.ecr.us-east-1.amazonaws.com/payments:$TF_VAR_microservice_version
+docker tag payments:patch 277048801940.dkr.ecr.us-east-1.amazonaws.com/payments_workers:$TF_VAR_microservice_version
+docker push 277048801940.dkr.ecr.us-east-1.amazonaws.com/payments:$TF_VAR_microservice_version
+docker push 277048801940.dkr.ecr.us-east-1.amazonaws.com/payments_workers:$TF_VAR_microservice_version
+cd .infra
+terraform apply
