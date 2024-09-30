@@ -1,4 +1,5 @@
 import = ["/home/coffee/.config/alacritty/themes/catppuccin_macchiato.toml"]
+# import = ["/home/coffee/.config/alacritty/themes/catppuccin-latte.toml"]
 
 [cursor]
 blink_interval = 750
@@ -9,7 +10,7 @@ blinking = "On"
 shape = "Block"
 
 [font]
-size = 9.0
+size = 12.0
 
 [font.bold]
 family = "Hurmit Nerd Font Mono"
