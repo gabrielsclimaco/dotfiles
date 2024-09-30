@@ -13,6 +13,7 @@ lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
 -- lvim.colorscheme = "pywal"
 lvim.colorscheme = "catppuccin-macchiato"
+-- lvim.colorscheme = "catppuccin-latte"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 vim.opt.clipboard = "unnamed"
@@ -205,6 +206,9 @@ formatters.setup {
       "yaml",
       "html",
       "pug",
+      "hcl",
+      "terraform",
+      "tf",
     },
   },
 }
@@ -295,6 +299,9 @@ lvim.plugins = {
   {
     "zbirenbaum/copilot-cmp",
     after = { "copilot.lua", "nvim-cmp" },
+  },
+  {
+    "digitaltoad/vim-pug",
   },
 }
 
