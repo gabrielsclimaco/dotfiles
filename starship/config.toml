@@ -45,9 +45,6 @@ symbol = " "
 [memory_usage]
 symbol = " "
 
-[package]
-symbol = " "
-
 [python]
 symbol = " "
 
