@@ -119,7 +119,23 @@ keys = [
         lazy.spawn(
             "setxkbmap -model abnt3 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"
         ),
-        desc="Set custom keyboard layout using setxkbmap",
+        desc="Set custom keyboard layout (us intl) using setxkbmap",
+    ),
+    Key(
+        [mod],
+        "semicolon",
+        lazy.spawn(
+            "setxkbmap -model abnt3 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"
+        ),
+        desc="Set custom keyboard layout (us intl) using setxkbmap",
+    ),
+    Key(
+        [mod, "shift"],
+        "slash",
+        lazy.spawn(
+            "setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier shift:both_capslock_cancel"
+        ),
+        desc="Set custom keyboard layout (br abnt2) using setxkbmap",
     ),
     # Brightness
     # Screen
@@ -199,20 +215,20 @@ layouts = [
 
 widget_defaults = dict(
     font="Hurmit Nerd Font Mono",
-    fontsize=14,
+    fontsize=12,
     padding=4,
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        top=bar.Gap(40),
-        wallpaper="/home/coffee/Imagens/Wallpapers/current/wallpaper.PNG",
+        top=bar.Gap(50),
+        wallpaper="/home/coffee/Imagens/Wallpapers/current/wallpaper.png",
         wallpaper_mode="fill",
     ),
     Screen(
         # top=bar.Gap(40),
-        wallpaper="/home/coffee/Imagens/Wallpapers/current/wallpaper.PNG",
+        wallpaper="/home/coffee/Imagens/Wallpapers/current/wallpaper.png",
         wallpaper_mode="fill",
     ),
 ]
@@ -229,6 +245,10 @@ mouse = [
         [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
     ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
+    # Click([], "Button6", lazy.screen.prev_group(skip_empty=True)),
+    # Click([], "Button7", lazy.screen.next_group(skip_empty=True)),
+    # Click(["control"], "Button6", lazy.screen.prev_group()),
+    # Click(["control"], "Button7", lazy.screen.next_group()),
 ]
 
 dgroups_key_binder = None
