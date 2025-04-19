@@ -17,6 +17,7 @@ nvim/*
 !picom.conf
 !polybar
 !qtile/
+qtile/__pycache__
 !ranger/
 !rofi/
 !scripts/

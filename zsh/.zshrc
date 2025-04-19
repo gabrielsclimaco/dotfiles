@@ -4,11 +4,9 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="jnrowe"
 
 plugins=(
-  adb
   ansible
   aws
   bgnotify
-  dnf
   docker
   docker-compose
   fzf
@@ -35,6 +33,7 @@ alias t="touch"
 alias f="ranger"
 alias sc="sudo systemctl"
 alias ls='lsd'
+alias n='nmcli'
 # alias attc="awmtt start -C $1"
 # alias attr="awmtt restart"
 # alias atts="awmtt stop"
@@ -59,6 +58,8 @@ alias dit='docker exec -it'
 alias tfw='terraform workspace'
 alias tfs='terraform state'
 alias tfsrm='terraform state rm'
+alias tffu='terraform force-unlock'
+alias tfim='terraform import'
 alias apb='ansible-playbook'
 alias v='nvim'
 alias lv='lvim'
@@ -80,12 +81,16 @@ alias plup="pulumi up"
 alias plupd="pulumi up --diff"
 # Mullvad
 alias ml="mullvad"
-alias mlc="mullvad connect && sleep 1 && mullvad status"
-alias mld="mullvad disconnect && sleep 1 && mullvad status"
+alias mlc="mullvad connect --wait"
+alias mld="mullvad disconnect --wait"
 alias mls="mullvad status"
 # Kubernetes
+alias kc='kubectl config use-context'
 alias kn='kubectl config set-context --current --namespace'
 alias ktmp='kubectl run tmp -it --rm --restart Never --image'
+alias kit='kubectl exec -it'
+alias kdb='kubectl debug -it --image=alpine'
+alias krr='kubectl rollout restart'
 export do='--dry-run=client --o yaml'
 export now='--force --grace-period 0'
 
@@ -113,9 +118,7 @@ export PATH="$PATH:/snap/bin"
 export FLYCTL_INSTALL="/home/coffee/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 # iFut
-export hermes="ec2-user@hermes.ifut.com.br"
-export zagreus="ec2-user@zagreus.ifut.com.br"
-export services="root@metabase.ifut.com.br"
+export rc='rails c -- --noautocomplete'
 # Android
 export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
@@ -151,3 +154,6 @@ if [ -f '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/ho
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+
+# RVM
+source /home/coffee/.rvm/scripts/rvm

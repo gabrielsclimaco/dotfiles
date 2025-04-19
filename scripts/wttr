@@ -14,14 +14,17 @@ case $condition in
   "Clear"*) icon="󰖙 ";; #\uf305
   "Sunny"*) icon="󰖙 ";; #\uf305
   "Cloudy"*) icon="󰖐 ";; #\uf041
+  "Partly cloudy"*) icon="󰖐 ";; #\uf041
   "Mist"*) icon="󰖑 ";; #\uf74e
   "Fog"*) icon="󰖑 ";; #uf74e
+  "Patches of fog"*) icon="󰖑 ";; #uf74e
   "Patchy rain nearby"*) icon="󰼳 ";; #\uf002
   "Light rain"*) icon="󰼳 ";; #\ue009
   "Partly rain"*) icon="󰼳 ";; #\ue009
   "Moderate rain"*) icon="󰖗 ";; #\ue009
   "Heavy rain"*) icon="󰙾 ";; #\uf02d
   "Overcast"*) icon=" ";; #\uf041
+  "Thunderstorm"*) icon=" ";; #\uf041
   *) icon=" ";; #\u2757
 esac
 

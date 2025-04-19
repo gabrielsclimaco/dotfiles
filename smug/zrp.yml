@@ -5,10 +5,12 @@ root: ~/code/zrp
 windows:
   # - name: frente
   #   root: ./frente
-  - name: infra
-    root: ./infra
+  - name: ops
+    root: ./ops
+    commands:
+      - export AWS_PROFILE=zrp-prod
   - name: caps
-    root: ./caps
+    # root: .
     # layout: main-vertical
     # panes:
     #   - root: .

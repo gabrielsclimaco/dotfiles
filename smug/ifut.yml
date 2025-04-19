@@ -5,8 +5,8 @@ root: ~/code/ifut
 windows:
   - name: suporte
   - name: k8s
-    root: ./ops/k8s
-  - name: tf
+    root: ./ops/kubernetes-resources
+  - name: infra
     root: ./ops/infrastructure-resources
     commands:
       - export AWS_PROFILE=ifut

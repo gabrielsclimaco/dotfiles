@@ -22,6 +22,7 @@ home_symbol = "󰋜"
 symbol = " "
 
 [gcloud]
+disabled = true
 symbol = " "
 format = "| [$symbol$account(@$domain)(($region))]($style)"
 # format = "[$symbol(($region))]($style)"
@@ -37,16 +38,13 @@ symbol = " "
 
 [kubernetes]
 disabled = false
-format = "[$symbol$context( ($namespace))]($style) "
+format = "[$symbol$context( ($namespace))]($style)"
 
 [lua]
 symbol = " "
 
 [memory_usage]
 symbol = " "
-
-[package]
-symbol = " "
 
 [python]
 symbol = " "

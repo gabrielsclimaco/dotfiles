@@ -1,12 +1,21 @@
 # Coffee config
 
-from libqtile import bar, layout, widget
+import os
+import subprocess
+
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
+
+
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.Popen([home])
 
 
 def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
@@ -17,6 +26,7 @@ def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
         if switch_screen == True:
             qtile.cmd_to_screen(i - 1)
 
+
 def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
     i = qtile.screens.index(qtile.current_screen)
     if i + 1 != len(qtile.screens):
@@ -24,6 +34,7 @@ def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
         qtile.current_window.togroup(group, switch_group=switch_group)
         if switch_screen == True:
             qtile.cmd_to_screen(i + 1)
+
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -35,38 +46,128 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Move between groups with mod + , and .
-    Key([mod],"comma", lazy.screen.prev_group(skip_empty = True), desc='Move focus to the previous not empty group'),
-    Key([mod],"period", lazy.screen.next_group(skip_empty = True), desc='Move focus to the next not empty group'),
-    Key([mod,"control"],  "comma",  lazy.screen.prev_group(), desc='Move focus to the previous group'),
-    Key([mod,"control"],  "period", lazy.screen.next_group(), desc='Move focus to the next group'),
+    Key(
+        [mod],
+        "comma",
+        lazy.screen.prev_group(skip_empty=True),
+        desc="Move focus to the previous not empty group",
+    ),
+    Key(
+        [mod],
+        "period",
+        lazy.screen.next_group(skip_empty=True),
+        desc="Move focus to the next not empty group",
+    ),
+    Key(
+        [mod, "control"],
+        "comma",
+        lazy.screen.prev_group(),
+        desc="Move focus to the previous group",
+    ),
+    Key(
+        [mod, "control"],
+        "period",
+        lazy.screen.next_group(),
+        desc="Move focus to the next group",
+    ),
     # Rofi
-    Key([mod], "space", lazy.spawn("rofi -show drun"), desc="Show rofi application menu"),
+    Key(
+        [mod], "space", lazy.spawn("rofi -show drun"), desc="Show rofi application menu"
+    ),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Show rofi run menu"),
     Key([mod], "w", lazy.spawn("rofi -show window"), desc="Show rofi windows menu"),
+    Key(
+        [mod],
+        "c",
+        lazy.spawn(
+            "rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'"
+        ),
+        desc="Show rofi clipboard menu",
+    ),
+    # Terminal
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Flameshot
-    Key([mod], "p", lazy.spawn("flameshot gui"), desc="Show rofi windows menu"),
+    Key([mod], "p", lazy.spawn("flameshot gui"), desc="Flameshot"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Change to next layout"),
     Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Change to previous layouts"),
     # Keyboard layout
-    Key([mod], "slash", lazy.spawn("setxkbmap -model abnt3 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"), desc="Set custom keyboard layout using setxkbmap"),
+    Key(
+        [mod],
+        "slash",
+        lazy.spawn(
+            "setxkbmap -model abnt3 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"
+        ),
+        desc="Set custom keyboard layout (us intl) using setxkbmap",
+    ),
+    Key(
+        [mod],
+        "semicolon",
+        lazy.spawn(
+            "setxkbmap -model abnt3 -layout us -variant intl -option caps:ctrl_modifier shift:both_capslock_cancel"
+        ),
+        desc="Set custom keyboard layout (us intl) using setxkbmap",
+    ),
+    Key(
+        [mod, "shift"],
+        "slash",
+        lazy.spawn(
+            "setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier shift:both_capslock_cancel"
+        ),
+        desc="Set custom keyboard layout (br abnt2) using setxkbmap",
+    ),
+    # Brightness
+    # Screen
+    Key(
+        [],
+        "XF86MonBrightnessUp",
+        lazy.spawn("brightnessctl --device='acpi_video0' set +10%"),
+        desc="Increase brightness",
+    ),
+    Key(
+        [],
+        "XF86MonBrightnessDown",
+        lazy.spawn("brightnessctl --device='acpi_video0' set 10%-"),
+        desc="Decrease brightness",
+    ),
+    # Keyboard
+    Key(
+        [],
+        "XF86KbdBrightnessUp",
+        lazy.spawn("brightnessctl --device='smc::kbd_backlight' set +20%"),
+        desc="Increase brightness",
+    ),
+    Key(
+        [],
+        "XF86KbdBrightnessDown",
+        lazy.spawn("brightnessctl --device='smc::kbd_backlight' set 20%-"),
+        desc="Decrease brightness",
+    ),
     # Kill, reload and quit
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -108,55 +209,46 @@ layouts = [
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
-    layout.Zoomy(),
+    # layout.Zoomy(),
     # layout.Spiral(),
 ]
 
 widget_defaults = dict(
     font="Hurmit Nerd Font Mono",
-    fontsize=14,
+    fontsize=12,
     padding=4,
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        # top=bar.Bar(
-        #     [
-        #         widget.GroupBox(),
-        #         widget.Prompt(),
-        #         widget.WindowName(),
-        #         widget.Chord(
-        #             chords_colors={
-        #                 "launch": ("#ff0000", "#ffffff"),
-        #             },
-        #             name_transform=lambda name: name.upper(),
-        #         ),
-        #         # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-        #         # widget.StatusNotifier(),
-        #         widget.Systray(),
-        #         widget.Clock(format="%d/%m/%Y | %a - %I:%M:%S %p"),
-        #         widget.CurrentLayout(),
-        #         widget.QuickExit(),
-        #     ],
-        #     24,
-        #     # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-        #     # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        # ),
-        # bottom = bar.Gap(10),
-        # right = bar.Gap(10),
-        # left = bar.Gap(10),
-        top = bar.Gap(40),
-        wallpaper = "/home/coffee/Imagens/Wallpapers/Endy_vector_satelliet.png",
-        wallpaper_mode = "fill"
+        top=bar.Gap(50),
+        wallpaper="/home/coffee/Imagens/Wallpapers/current/wallpaper.png",
+        wallpaper_mode="fill",
+    ),
+    Screen(
+        # top=bar.Gap(40),
+        wallpaper="/home/coffee/Imagens/Wallpapers/current/wallpaper.png",
+        wallpaper_mode="fill",
     ),
 ]
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
+    # Click([], "Button6", lazy.screen.prev_group(skip_empty=True)),
+    # Click([], "Button7", lazy.screen.next_group(skip_empty=True)),
+    # Click(["control"], "Button6", lazy.screen.prev_group()),
+    # Click(["control"], "Button7", lazy.screen.next_group()),
 ]
 
 dgroups_key_binder = None
@@ -195,4 +287,4 @@ wl_input_rules = None
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-# wmname = "LG3D"
+wmname = "LG3D"

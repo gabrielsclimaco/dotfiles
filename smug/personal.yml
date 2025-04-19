@@ -8,5 +8,7 @@ windows:
       - gotop
   - name: ricing
     root: ~/.config
+    commands:
+      - neofetch
   - name: config
     root: ~/ansible-desktop-config

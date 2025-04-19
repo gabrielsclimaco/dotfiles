@@ -2,7 +2,10 @@
 -- General config
 lvim.format_on_save.enabled = true
 lvim.colorscheme = "catppuccin-macchiato"
-vim.opt.clipboard = ""
+-- lvim.colorscheme = "catppuccin-latte"
+-- to disable icons and use a minimalist setup, uncomment the following
+-- lvim.use_icons = false
+vim.opt.clipboard = "unnamed"
 
 -----------------
 -- Keymappings
@@ -174,6 +177,124 @@ formatters.setup {
       "yaml",
       "html",
       "pug",
+      "hcl",
+      "terraform",
+      "tf",
     },
   },
 }
+
+-- -- set additional linters
+-- local linters = require "lvim.lsp.null-ls.linters"
+-- linters.setup {
+--   { command = "flake8", filetypes = { "python" } },
+--   {
+--     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+--     command = "shellcheck",
+--     ---@usage arguments to pass to the formatter
+--     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+--     extra_args = { "--severity", "warning" },
+--   },
+--   {
+--     command = "codespell",
+--     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--     filetypes = { "javascript", "python" },
+--   },
+-- }
+
+-- Additional Plugins
+lvim.plugins = {
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  {
+    'AlphaTechnolog/pywal.nvim',
+    name = 'pywal',
+  },
+  { 'terryma/vim-multiple-cursors' },
+  { 'towolf/vim-helm' },
+  { 'lukoshkin/trailing-whitespace' },
+  { 'digitaltoad/vim-pug' },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "css", "scss", "sass", "html", "javascript", "vue" }, {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      })
+    end,
+  },
+  {
+    'glepnir/zephyr-nvim',
+  },
+  {
+    'mhartington/oceanic-next',
+  },
+  {
+    'projekt0n/github-nvim-theme',
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+  },
+  {
+    'norcalli/nvim-colorizer.lua',
+  },
+  {
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup({})
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup {
+          panel = { auto_refresh = true },
+          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+        }
+      end, 100)
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua", "nvim-cmp" },
+  },
+  {
+    "digitaltoad/vim-pug",
+  },
+}
+
+-- Can not be placed into the config method of the plugins.
+lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
+table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
+
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*" },
+  -- trim whitespaces on save
+  command = "%s/\\s\\+$//e",
+})
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   pattern = { "*.json", "*.jsonc" },
+--   -- enable wrap mode for json files only
+--   command = "setlocal wrap",
+-- })
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "zsh",
+--   callback = function()
+--     -- let treesitter use bash highlight for zsh files as well
+--     require("nvim-treesitter.highlight").attach(0, "bash")
+--   end,
+-- })
