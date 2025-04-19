@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Versão da CLI
+VERSAO="1.0"
+
+# Função para exibir a versão e os comandos
+help() {
+    echo "CLI Versão: $VERSAO"
+    echo "Comandos disponíveis:"
+    echo "  console       Acessa o console da API usando o pod aleatório do Sidekiq."
+    echo "  restart       Reinicia um deployment. Uso: restart <nome-do-deployment>."
+    echo "  logs          Exibe os logs de um deployment. Uso: logs <nome-do-deployment>."
+    echo "  clear         Remove pods em estado 'Failed'."
+    echo "  grafana       Abre o dashboard do Grafana na porta 3000."
+    echo "  ns            Troca namespace atual do cluster"
+    echo "  --help        Exibe esta mensagem de ajuda."
+}
+
+# Função para listar os pods
+console() {
+    echo "Acessando o console da API..."
+    pod=$(kubectl get pods -l app=sidekiq -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | shuf -n 1)
+    kubectl exec -it $pod -- rails c -- --noautocomplete
+}
+
+# Função para reiniciar um deploy
+restart_deploy() {
+    echo "Reiniciando um deploy... $1"
+    deploy="deploy/$1"
+    kubectl rollout restart $deploy
+}
+
+# Função para mostrar logs de um deploy
+get_logs() {
+    echo "Logs de um deploy... $1"
+    deploy="deploy/$1"
+    kubectl logs $deploy
+}
+
+# Remove failed pods
+clean_failed() {
+    echo "Removendo failed state pods"
+    kubectl delete pods --field-selector status.phase=Failed
+}
+
+grafana() {
+    echo "Abrindo Grafana na porta 3000"
+    kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n kube-prometheus-stack
+}
+
+ns() {
+    echo "Trocando namespace para: $1"
+    kubectl config set-context --current --namespace "$1"
+}
+
+# Verifica o argumento
+if [ $# -eq 0 ]; then
+    # Se não houver argumentos, exibe a versão e ajuda
+    help
+    exit 0
+fi
+
+# Processa o argumento
+case "$1" in
+    console)
+        console
+        ;;
+    restart)
+        restart_deploy $2
+        ;;
+    logs)
+        get_logs $2
+        ;;
+    clear)
+        clean_failed
+        ;;
+    grafana)
+        grafana
+        ;;
+    ns)
+        ns $2
+        ;;
+    --help)
+        help
+        ;;
+    *)
+        # Caso o argumento seja inválido, exibe a versão e ajuda
+        help
+        ;;
+esac
