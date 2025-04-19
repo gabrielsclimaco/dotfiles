@@ -6,17 +6,18 @@ filename=$(basename "$filepath")
 ext="${filename##*.}"
 
 # Generate color scheme
-wal -i $filepath
+# wal -i $filepath
 
 # Copy wallapaper and generate color scheme
 cp $filepath ~/Imagens/Wallpapers/current/wallpaper.$ext
 # wal -i ~/Imagens/Wallpapers/current/wallpaper.$ext
 
 # Update theme
-cp ~/.cache/wal/colors.Xresources ~/.Xresources
+# cp ~/.cache/wal/colors.Xresources ~/.Xresources
 # If extension has changed, update path to wallpaper on AwsomeWM
-sed -i "s/current\/wallpaper.*/current\/wallpaper.$ext\")/" ~/.config/awesome/rc.lua
+# sed -i "s/current\/wallpaper.*/current\/wallpaper.$ext\")/" ~/.config/awesome/rc.lua
+sed -i "s/current\/wallpaper.*/current\/wallpaper.$ext\",/" ~/.config/qtile/config.py
 # Update firefox theme
-pywalfox update
+# pywalfox update
 # Update betterlockscreen wallpaper
-betterlockscreen -u ~/Imagens/Wallpapers/current/wallpaper.$ext --fx blur
+# betterlockscreen -u ~/Imagens/Wallpapers/current/wallpaper.$ext --fx blur
