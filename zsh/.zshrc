@@ -14,7 +14,6 @@ plugins=(
   kubectl
   systemd
   terraform
-  thefuck
   tmux
   vagrant
   wd
@@ -102,7 +101,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Env Vars
 # Defaults
-export EDITOR="lvim"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export TERM="xterm-256color"
@@ -146,14 +145,13 @@ compinit
 
 # Should run everytime
 # (cat ~/.cache/wal/sequences &)
-eval $(thefuck --alias)
 eval "$(starship init zsh)"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/coffee/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
 
 # RVM
-source /home/coffee/.rvm/scripts/rvm
+# source /home/coffee/.rvm/scripts/rvm
