@@ -12,8 +12,6 @@ awesome/lain
 !lvim/
 # Only adds nvim/init.vim
 !nvim/
-nvim/*
-!nvim/init.vim
 !picom.conf
 !polybar
 !qtile/
