@@ -7,13 +7,22 @@ VERSAO="1.0"
 help() {
     echo "CLI Versão: $VERSAO"
     echo "Comandos disponíveis:"
+    echo "  migration     Executa migrações pendentes no banco de dados usando um pod aleatório do Sidekiq."
     echo "  console       Acessa o console da API usando o pod aleatório do Sidekiq."
     echo "  restart       Reinicia um deployment. Uso: restart <nome-do-deployment>."
     echo "  logs          Exibe os logs de um deployment. Uso: logs <nome-do-deployment>."
     echo "  clear         Remove pods em estado 'Failed'."
-    echo "  grafana       Abre o dashboard do Grafana na porta 3000."
+    echo "  grafana       Abre o dashboard do Grafana na porta 4000."
+    echo "  signoz        Abre o dashboard do Signoz na porta 5000."
     echo "  ns            Troca namespace atual do cluster"
     echo "  --help        Exibe esta mensagem de ajuda."
+}
+
+# Função para listar os pods
+migration() {
+    echo "Executando migrações do Banco de Dados da API..."
+    pod=$(kubectl get pods -l app=sidekiq -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | shuf -n 1)
+    kubectl exec -it $pod -- rails db:migrate
 }
 
 # Função para listar os pods
@@ -44,8 +53,13 @@ clean_failed() {
 }
 
 grafana() {
-    echo "Abrindo Grafana na porta 3000"
-    kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 -n kube-prometheus-stack
+    echo "Abrindo Grafana na porta 4000"
+    kubectl port-forward svc/kube-prometheus-stack-grafana 4000:80 -n kube-prometheus-stack
+}
+
+signoz() {
+    echo "Abrindo Signoz na porta 5000"
+    kubectl port-forward -n signoz svc/signoz 5000:8080
 }
 
 ns() {
@@ -62,6 +76,9 @@ fi
 
 # Processa o argumento
 case "$1" in
+    migration)
+        migration
+        ;;
     console)
         console
         ;;
@@ -76,6 +93,9 @@ case "$1" in
         ;;
     grafana)
         grafana
+        ;;
+    signoz)
+        signoz
         ;;
     ns)
         ns $2

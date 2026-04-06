@@ -15,7 +15,7 @@ plugins=(
   systemd
   terraform
   tmux
-  vagrant
+  # vagrant
   wd
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -49,7 +49,7 @@ alias setkb-us="setxkbmap -model abnt2 -layout us -variant intl -option caps:ctr
 alias setkb-br="setxkbmap -model abnt2 -layout br -variant abnt2 -option caps:ctrl_modifier shift:both_capslock_cancel"
 alias clima="curl pt-br.wttr.in"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
-alias zshconfig="lvim ~/.config/zsh/.zshrc"
+alias zshconfig="nvim ~/.config/zsh/.zshrc"
 alias zshapply="source ~/.config/zsh/.zshrc"
 # Work
 alias dps='docker ps'
@@ -62,7 +62,7 @@ alias tfim='terraform import'
 alias apb='ansible-playbook'
 alias v='nvim'
 alias lv='lvim'
-alias py='python'
+alias py='python3'
 alias cpid="cat ~/.ssh/id_ed25519.pub | awk -F ' ' '{print \$1 \" \" \$2}' | xclip -selection clipboard"
 alias open-android="android-studio src-cordova/platforms/android > /dev/null 2>&1 &"
 alias wgup="sudo wg-quick up wg0"
@@ -119,11 +119,13 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 # iFut
 export rc='rails c -- --noautocomplete'
 # Android
-export ANDROID_HOME=$HOME/Android/Sdk
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
+export ANDROID_HOME=$HOME/Android
+export ANDROID_SDK_ROOT=$HOME/Android
+export PATH=${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-export PATH=$PATH:/opt/gradle/gradle-8.8/bin
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/tools/bin
+# export PATH=$PATH:/opt/gradle/gradle-8.8/bin
 # Java
 export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 export JAVAC_HOME=$JAVA_HOME/bin/javac
@@ -139,8 +141,8 @@ export CLOUDSDK_PYTHON=python3
 export oldssh=~/Documentos/.stuff/id_ed25519
 
 # >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/2.3.0/gems/vagrant-2.3.0/contrib/zsh $fpath)
-compinit
+# fpath=(/opt/vagrant/embedded/gems/2.3.0/gems/vagrant-2.3.0/contrib/zsh $fpath)
+# compinit
 # <<<<  Vagrant command completion (end)
 
 # Should run everytime

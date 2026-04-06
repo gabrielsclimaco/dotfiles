@@ -5,7 +5,7 @@ root: ~/code/personal
 windows:
   - name: monitoring
     commands:
-      - bashtop
+      - bpytop
   - name: ricing
     root: ~/.config
     commands:

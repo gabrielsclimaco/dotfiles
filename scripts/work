@@ -1,0 +1,13 @@
+#!/bin/bash
+
+configs=(
+  personal
+  ifut
+)
+
+for config in "${configs[@]}"; do
+  session_name="smug_launcher_$(basename "$config" .yml | tr -cd '[:alnum:]')"
+  tmux new-session -d -s "$session_name" "smug start '$config'; tmux kill-session -t '$session_name'"
+done
+
+tmux a
